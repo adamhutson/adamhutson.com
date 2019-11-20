@@ -1,0 +1,137 @@
+---
+title: "Restoring Cassandra Data"
+slug: restoring-cassandra-data
+url: restoring-cassandra-data
+date: 2016-04-08
+draft: false
+---
+= Restoring Cassandra Data
+
+image::/images/restore.jpg[]
+
+If you’ve ever lost your production data or discovered that it had been corrupted, then you know the importance of being able to restore that data.  
+Restoring your Cassandra data can be quick and painless.  
+The following three methods will help you to gain a better understanding of what’s involved.
+
+Before you can begin to restore data though you have to have data to restore.  
+You are backing up your data, right?  
+If not, check out our post on backing up Cassandra data.  
+Once you’re sure your data is safely backed up, then you can focus on how to restore it.
+
+Currently, Apache Cassandra provides three methods to restore data from a snapshot (Cassandra’s term for a backup):
+
+* Restart the service
+* Refresh the data
+* Use the sstableloader tool
+
+Each of these methods will ultimately restore data to a node.  
+However, each has a different set of circumstances for when to use.  
+It’s important to know when to use each.  
+This post will describe each method in detail and what dictates the choice of each.
+
+== Restart the Service
+
+*What is it:*  
+The first restore method involves restarting the Cassandra service.  
+You’re essentially shutting down a node to replace all the bad data with the backed up data.
+
+*When to use it:* 
+Restarting the service is going to cover your most common situations for needing to restore data.  
+This is for when you’ve got a node that has gone down, or has corrupted it’s data in some fashion.  
+This is for the machine that has already been a Cassandra node and will be continue to be.
+
+*Steps to do it:*  
+A simple restart doesn’t do it all for you.  
+You have to get rid of all the bad data first.  
+This method will have you erase all traces of the bad data that was on the machine.  
+Once it’s all cleaned up, you’ll move all the backed up data into place.  
+Finally, a restart of the service will get all of the data back into the cluster.  
+It also recreates all the necessary stuff that you cleaned up.
+
+1. Stop the Cassandra service.
+[source,bash]
+sudo service cassandra stop
+
+2. Run the nodetool drain command to flush all data from memtables to disk.
+[source,bash]
+nodetool drain
+
+3. Delete all the commit log files.
+[source,bash]
+sudo rm -rf /var/lib/cassandra/commitlog/
+
+4. Delete all the data files from each of the <keyspace>/<table> directories.
+[source,bash]
+sudo rm /var/lib/cassandra/data/<keyspace>/<table>/*.*
+
+5. Move all the backed up data files into the correct <keyspace>/<table> directories.
+[source,bash]
+sudo mv /<backups>/<keyspace>/<table>/*.db /var/lib/cassandra/data/<keyspace>/<table>/
+
+6. Start the Cassandra service.
+[source,bash]
+sudo service cassandra start
+
+== Refresh the Data
+
+*What is it:*  
+The second restore method is to move the backed up data files into place and using the multipurpose `nodetool` to refresh the cluster.  
+The process involves swapping in the sstable data file(s) directly into the keyspace/column family directories and telling Cassandra to reload the new files.
+
+*When to use it:*  
+This method is for when you have a brand new node to replace a node that has been unrecoverable.  
+There was never any trace of existing data, so all you’re doing is putting the backed up data into the correct directories and issuing the refresh command via nodetool.
+
+*Steps to do it:*  This is the easiest method to restore data.  Assuming you’ve created a new node that is running a clean install of Cassandra.
+
+1. Recreate the schema on the clean Cassandra install using the backed up schema file (you are backing up your schema, right?).
+[source,bash]
+cqlsh -E my_schema_file.cql
+
+2. Move all the backed up data files into the correct <keyspace>/<table> directories.
+[source,bash]
+sudo mv /<backups>/<keyspace>/<table>/*.db /var/lib/cassandra/data/<keyspace>/<table>/
+
+3. Run the nodetool refresh command to tell Cassandra to reload it’s data files.
+[source,bash]
+nodetool refresh
+
+== SSTableLoader
+
+*What is it:*  
+The third, and final, restore method is to use the sstableloader tool.  
+This tool is included in the Apache distribution of Cassandra.  
+Its purpose is, as it sounds, to load Cassandra sstable(s) into the cluster.  
+It’s not quick and it takes up a lot of additional disk space, but it does work.
+
+*When to use it:*  
+There is really only one or two reasons to follow this route for restoring data.  
+The first reason would be if you wanted to change from using tokens in an existing cluster and migrate the same data to use vnodes in a new cluster. 
+The second reason would be if you wished to restore your data into a cluster that has either a different replication factor or a different number of nodes that cluster that the data was backed up from.  
+Granted, neither of these situations are meant to recover data.  
+However, it’s still a valid way to restore backed up data
+
+*Steps to do it:*  
+This is a very time-consuming task as it involves reading each and every record in the sstable(s) and then writing each of them out to the correct node as dictated by the configured replication factor.  
+The records will follow the same write path as if the data were being written for the first time.
+
+1. Recreate the schema on the clean Cassandra install using the backed up schema file (you are backing up your schema, right?).
+[source,bash]
+cqlsh -E my_schema_file.cql
+
+2. Run the sstableloader command from each of the locations of the backed up data files.
+[source,bash]
+sstableloader /<backups>/<keyspace>/<table>/
+
+3. Repeat step 2 for each keyspace/table combination that you are restoring.
+ 
+== Conclusion
+
+This post has walked you through the three ways to restore data into Cassandra.  
+You should now be able to assess when each method should be used.  
+As well as how to execute each method.  
+As great as it is to know who to do each of these, you need to test your knowledge.  
+Don’t just rely on reading a post and think you’ll know what to do when the crisis occurs.  
+Go out and test each of the scenarios out.  
+Make sure to time your efforts.  
+One day, you’ll be glad that you can answer your boss when you’re asked “how long before we’re back online?”.

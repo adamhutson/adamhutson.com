@@ -1,0 +1,99 @@
+---
+title: "How To Create a Cassandra Cluster in AWS Part 1"
+slug: how-to-create-a-cassandra-cluster-in-aws-part-1
+url: how-to-create-a-cassandra-cluster-in-aws-part-1
+date: 2015-12-23
+draft: false
+---
+= How To Create a Cassandra Cluster in AWS Part 1
+
+In this post, I’ll walk you through creating a Cassandra cluster in Amazon’s Web Services. 
+The first thing you’ll need to do is sign in to your Amazon Console.  
+If you don’t have one, create an account.  
+Once you’re logged in, from the dashboard, click on the EC2 logo, under the Compute section.
+
+image::/images/ec2.jpg[]
+
+This is Amazon’s Elastic Compute Cloud where you can launch virtual servers, known as an Amazon EC2 instance.  
+From the EC2 Dashboard, you will notice that you have multiple regions to choose from in the upper right corner of the dashboard.  
+Since I’m U.S. based, I’ve selected the N. Virginia based data center.  
+Now we’re going to start the Launch Instance wizard.  
+Right in the middle of the screen, you should see a large “Launch Instance” button under the Create Instance section.
+
+== Create the Virtual Machines
+
+There are many ways to select an Operating System for your virtual server.  
+Some are provided via an Amazon Machine Image (AMI), others are provided from the Community, or you can even provide your own Image.  
+For this tutorial, I’m looking to run Ubuntu on an instance with a small local SSD.
+
+For that I’ll select the Quick Start menu,
+
+image::/images/create-a-virtual-machine.jpg[]
+
+and chose the Ubuntu Server option.
+
+image::/images/select-ubuntu.jpg[]
+
+The next step is to select an instance size.
+
+image::/images/choose-an-instance-type.jpg[]
+
+I’m wanting something that uses local SSDs and not EBS.  
+I could try to use the free tier and get a super tiny instance, but it doesn’t really demonstrate anything that you’d actually do in the real world.  
+From the available instance sizes, I’m looking for something not too expensive or beefy, since this is just a tutorial.  
+I’ve decided that an m3.large is small enough to demonstrate what I need and still big enough to run without any issues.
+
+Choose the m3.large instance type.  This virtual server has 2 cores, 7.5G RAM & a 32G SSD with moderate network performance.
+
+image::/images/m3-large.png[]
+
+*Step 3* is where you can decide how many of this these instances you wish to create and which availability zone, if you want a VPC, etc.
+
+image::/images/configure-instance-details.jpg[]
+
+For this tutorial, I think a three node cluster will suffice.  
+I’ve changed the Number of Instances input from 1 to 3 and left the rest as the defaults.
+
+image::/images/3-node-cluster.jpg[]
+
+*Step 4* is for adding any additional storage.
+
+image::/images/add-storage.jpg[]
+
+This tutorial doesn’t really have any need for additional storage, so I’m going to pass over this selection, leaving it all as the defaults.
+
+*Step 5* is for adding tags to your instance.
+
+image:images/tag-instances.jpg[]
+
+*Step 6* is for adding a Security Group around your instances.
+
+image::/images/configure-security-groups.jpg[]
+
+I’ve updated the Security Group name & description to reflect what I’m doing.  
+I also added four inbound rules for the ports that Cassandra requires.
+
+image::/images/inbound-rules.jpg[]
+
+*Step 7* allows you to review all the choices you’ve made and make any changes.  
+If you’re satisfied with what you’ve selected, then you can press the Launch button and watch your virtual servers get created.
+
+image::/images/review-instance-launch.jpg[]
+
+After you press the Launch button, AWS will prompt you to add a key pair to be used when you want to log into your new instances.
+
+image::/images/select-key-pair-1.jpg[]
+
+For the sake of the tutorial, I’ll create a new key pair and download the private key file.  
+If you lose this private key, you’ll never be able to access these instances and will need to terminate them and start over.  
+So don’t forget to click the Download Key Pair button and keep that .pem file someplace safe.
+
+image::/images/download-key-pair.jpg[]
+
+Now I’ve pressed the Launch Instances button and my machines are being created.
+
+image::/images/launch-status.jpg[]
+
+So now I’m on the clock and being charged by Amazon for my use of these 3 machines.
+
+In part 2 of this two-part tutorial, We will install & configure Cassandra on our cluster.

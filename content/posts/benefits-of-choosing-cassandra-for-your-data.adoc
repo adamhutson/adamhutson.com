@@ -1,0 +1,113 @@
+---
+title: "Benefits of choosing Cassandra for your data"
+slug: benefits-of-choosing-cassandra-for-your-data
+url: benefits-of-choosing-cassandra-for-your-data
+date: 2016-05-17
+draft: false
+---
+= Benefits of choosing Cassandra for your data
+
+image::/images/cassandra-data-store.png[]
+
+Choosing the right tool for a project can sometimes be easy.  
+For example, to drive a nail, the obvious choice would be a hammer.  
+Other times, the choice is not as easy or obvious.  
+A data engineer, like a good carpenter, needs to know that different tasks require different tools.  
+Selecting which database will hold your data has many factors to consider before a decision is made.
+
+Apache Cassandra is one of the many tools that a data engineer should know how and when to use.  
+By the end of this post, you should know the benefits that Cassandra offers.  
+Hopefully, this will help your decision of choosing a database for your data.
+
+== What is Apache Cassandra?
+
+Apache Cassandra is a fully distributed, column-oriented, peer-to-peer database that offers linear scalability and high availability.  
+It was born at Facebook from a need for a database to power their Inbox Search.  
+At the time, papers on Amazon’s Dynamo and Google’s BigTable had been recently published.  
+Cassandra borrowed ideas from each by bringing together Dynamo’s fully distributed design and BigTable’s data model.  
+The result was a globally available and eventually consistent database.
+
+== What are Cassandra’s benefits?
+
+Cassandra offers advantages that relational and other NoSQL databases cannot match.  
+Being continuously available with linear performance scalability and tunable consistency are just a few of the benefits that come to mind.
+
+*Continuously Available*
+
+Cassandra’s peer-to-peer design allows no single point of failure.  
+That’s worth repeating; no single point of failure.  
+This may be one of the single most important features of Cassandra.  
+Cassandra is designed to stay up and running during failures.  
+That means the system will always be available, even when you lose machines in the cluster.  
+This continuous availability even works across multiple data centers.
+
+*Linear Performance*
+
+Due to it’s architecture, Cassandra performs reads and writes very well. 
+It’s write path for data is faster than most all other databases on the market.  
+The beauty of Cassandra shines when scaling the cluster, though.  
+It has the unique benefit of growing performance linearly.  
+If you are getting 10,000 writes per second with 10 nodes, then you’ll see 20,000 writes per second when you scale to 20 nodes.  
+The same is true for reads.  
+This makes capacity planning so much easier, because it’s that simple to predict.  
+Add twice the nodes, you’ll get precisely twice the performance.
+
+*Tunable Consistency*
+
+Cassandra works off of the idea that data is stored on multiple nodes. 
+That idea is called it’s replication factor.  
+To store the same piece of data on 3 of the nodes in your cluster, you would set up a replication factor of 3.  
+This means that every single write you send to Cassandra will be replicated to 3 nodes.  
+However, getting that piece of data to all the necessary nodes can take a small amount of time.  
+What if I want it to go faster? 
+Maybe I don’t necessarily need to wait for all the replicas to have the data.  
+The answer is to let the client determine how many nodes need to have acknowledged the data before the client can move on with the next task.  
+If the data needs to have a fast ACK response, then the client can set the consistency to a lesser level.  
+This is called being eventually consistent.  
+The data will still end up being replicated to the appropriate number of nodes, but the write isn’t held up for the replication to occur.
+
+*Flexible Data Model*
+
+Cassandra’s data model is a blend of key-value and column-oriented database storage principles.  
+It allows developers to think of the data in familiar table structure. 
+Every column consists of 3 parts, the column name, the column value, and a timestamp.  
+This is also referred to as a tuple. 
+The beauty in this design is that if there is ever a collision, then the column with the latest timestamp wins.  
+Columns can be normal stuff like text/numeric, or more advanced like maps/sets, or even more complex like JSON.  
+It’s all valid.  
+Every table’s row has some column(s) that is/are specified as it’s primary key(s). 
+The value of these key column(s) are hashed together into a single value.  
+That value is used for placement in the cluster ring.  
+Unlike traditional databases, every row can have a different number of columns up to 2 billion columns worth.  
+It’s all very flexible.  
+When designing tables, it’s important to remember two things.  
+First, a single table is meant to serve a single query and, second, data duplication is encouraged.
+
+*Strong Community Involvement*
+
+Since Cassandra is open-sourced through the Apache Foundation, there is a very strong community presence.  
+From getting questions answered on http://stackoverflow.com/questions/tagged/cassandra[StackOverflow] or irc://freenode.net/#cassandra[IRC] channels to filling bugs/improvements in https://issues.apache.org/jira/browse/cassandra[JIRA], there is always someone willing to help out.  
+Not to mention that DataStax offers a slew of tutorials on the proper usage for maximizing your Cassandra deployment.  
+In my opinion, the community is Cassandra’s biggest strength.
+
+*Standard Monitoring*
+
+Cassandra is written with Java’s Managed Beans to expose Java Monitoring Extensions (JMX).  
+This is the way that metrics about performance, latencies, system usage, etc are streamed to other applications.  
+There are many software tools that are in the market of consuming Cassandra specific JMX metrics.  
+Some of them are DataStax’s http://docs.datastax.com/en/latest-opsc[OpsCenter], https://www.datadoghq.com/[DataDog], and http://grafana.org/[Grafana].  
+Consuming the metrics is only the first part, though.  
+Graphing and understanding those metrics are essential to running a healthy Cassandra deployment.
+
+*Familiar Query Language*
+
+Cassandra Query Language (CQL) is a SQL-like syntax for interacting with Cassandra’s data.  
+If you have a background in relational databases, then you’ll immediately recognize the SELECT, INSERT, UPDATE, DELETE syntax of CQL.  
+The ideas transfer from other technologies to Cassandra.  
+The two main differences is that table joins are not allowed and filtering must be done via the primary/clustering keys.
+
+== Summary
+
+I hope this helps you when you need to decide to use Cassandra for your data.  
+All of the benefits described above should give you an idea of what to expect when working with this fantastic technology.  
+Please check out my many other posts on Cassandra to learn more.

@@ -1,0 +1,215 @@
+---
+title: "Cassandra Summit 2015"
+slug: cassandra-summit-2015
+url: cassandra-summit-2015
+date: 2015-10-05
+draft: false
+---
+= Cassandra Summit 2015
+
+Imagine if you could create an event that was able to generate over a 4,000% increase in attendance over five years.  
+Well, that’s exactly what DataStax has done with the annual Cassandra Summit in the Bay area.
+
+ *4,000% increase in attendance*
+
+This past week was the 2015 Cassandra Summit, held in Santa Clara, was the largest NoSQL conference in the world.  
+Prior to the start, there were over 6,100 registrations onsite.  
+Considering that the very first Cassandra Summit was only five years ago, it had a whopping 145 attendees.  
+What an amazing testament to the strength of Cassandra in the community.
+
+ *Largest NoSQL conference in the world*
+
+There were many huge names that helped sponsor the event this year which allowed for a free admission price.  
+If you were lucky enough to make the annual trek to California, you were overwhelmed with nearly 150 sessions of fantastic content by some of the brightest members in the community.  
+All volunteer work too.
+
+This was the first year that DataStax was flooded with submissions of people wanting to have the opportunity to speak at the Summit.  
+They actually had to turn people’s paper submissions down.  
+Amazing!  
+I feel so lucky to have gotten the chance to attend.  
+The networking, education, and sense of community is over-whelming
+
+== Keynote
+
+Every year, the Summit is kicked off by a keynote that includes “Where the Industry is Going” speech by Billy Bosworth,
+image::/images/cassandra-summit-keynote.jpg[] and a “State of Cassandra” speech by Jonathan Ellis.  
+This year, there was a new-comer to the stage.  
+Microsoft’s EVP of Cloud, Scott Guthrie, was there to tell the community that Microsoft has joined in Cassandra fun.  
+Wait, what?
+
+Microsoft & Cassandra sound like oil & vinegar.  
+Even Billy pointed out that most of us in the community, are all die-hard Unix users that loathe having to get on a Windows platform.  
+Scott was there to sway our opinion as Microsoft is changing it’s course to favor the open source community.
+
+== Sessions
+
+This year, there were so many sessions for learning that you really had to be selective in what you could attend.  
+A lot of image::/images/cassandra-summit-session1.jpg[] the sessions that I tried to attend were so popular that they had to close when maximum room occupancy was reached.  
+DataStax anticipated this and provided attendees to a chance to purchase a Priority Pass.  
+It would give you first access to all sessions, which could get you into the popular sessions before they closed.  
+Great idea, if you ask me.
+
+I chose to not attend a ton of the sessions.  
+I took the opportunity to mingle and network amongst the crowd as much as I could.  
+It also gave me a chance to meet people in-person that I’ve interacted with online for years.  
+Getting to catch up and share a beer with so many Cassandra-ians in a way only the Summit can provide.
+
+Some of the sessions I tried to attend were closed due to popularity, image::/images/cassandra-summit-networking1.jpg[] but I was able to make it into others.  
+Probably the most memorable one, too me, was CrowdStrike’s “1 million writes per second on 60 nodes with Cassandra and EBS”.  
+What a turn in traditional thinking that you can’t do high performance on Elastic Block Storage.  
+Up until now, it was Netflix’s benchmark that was the standard for how to achieve 1 million writes per second.  
+But it required a lot more nodes that 60 and had to use SSDs to get that kind of high IOPS.  
+Just goes to show what the community is capable of.
+
+== Certifications
+
+image::/images/cassandra-summit-certification1.jpg[]
+
+In addition to the sessions, DataStax provided a day before the Summit for people to get take Cassandra certification tests.  
+Just in that one day, over 500 people were able to receive certifications like Cassandra Certified Developer & Certified Administrator.
+
+== Slides
+
+Every year, DataStax tries to record most of the Summit’s sessions so they can post them to Planet Cassandra for the community to enjoy.  
+That way you are able to see  the sessions that you missed image::/images/cassandra-summit-slides1.jpg[] out on.  
+Some of the breakouts and booth presentations are not recorded.  
+Those you just have to be there to see live.  
+All the recordings & slides take a little while to gather from the speakers, so it’s not accessible for a while after the Summit.  
+A lot of the speakers will post their slides online somewhere before that the sessions are published.  
+I scoured the internets for all the slideshares I could find.  
+Of the nearly 150 sessions, I was able to find slides for only 40.
+
+Here is the list of available slides (in no particular order).  Enjoy!
+
+* Billy Bosworth, Jonathan Ellis, & Scott Guthrie – Keynote
+http://www.slideshare.net/planetcassandra/cassandra-summit-2015-keynote
+
+* Nate McCall – Hardening Apache Cassandra for Compliance (or Paranoia)
+http://www.slideshare.net/zznate/hardening-cassandra-for-compliance-or-paranoia
+
+* Evan Chan –  Breakthrough OLAP
+http://velvia.github.io/presentations/2015-breakthrough-olap-cass-spark/index.html#/
+
+* Caleb Rackliffe – Intro to DSE Search
+http://www.slideshare.net/CalebRackliffe/cassandra-summit-2015-intro-to-dse-search
+
+* Carl Yeksigian – Materialized Views
+http://www.slideshare.net/carlyeks/cassandra-materialized-views
+
+* Avi Kivity – Scylla 1 Million CQL operations per second per server
+http://www.slideshare.net/AviKivity/scylla-1-million-cql-operations-per-second-per-server
+
+* João Paulo Eiti Kimura – A Change of Seasons
+http://www.slideshare.net/eitikimura/cassandra-summit-2015-a-change-of-seasons
+
+* Aaron Morton – Steady State Data Size with Compaction Tombstones and TTL
+http://www.slideshare.net/aaronmorton/cassandra-sf-2015-steady-state-data-size-with-compaction-tombstones-and-ttl
+
+* Aaron Morton – Repeatable, Scalable, Reliable, Observable Cassandra
+http://www.slideshare.net/aaronmorton/cassandra-sf-2015-repeatable-scalable-reliable-observable-cassandra
+
+* Mick Semb Wever – Distributed Tracing from Application to Database
+http://thelastpickle.com/files/2015-09-24-using-zipkin-for-full-stack-tracing-including-cassandra/presentation/tlp-reveal.js/tlp-cassandra-zipkin.html#/
+
+* Carlos Alonso – Troubleshooting Cassandra performance issues as a developer
+http://www.slideshare.net/CarlosAlonsoPrez/case-study-troubleshooting-cassandra-performance-issues-as-a-developer
+
+* Gary Stewart & Christopher Reedijk – Exploiting Hotel Cassandra
+http://www.slideshare.net/ING-IT/exploiting-hotel-cassandra-53313082
+
+* Rekha Joshi – Reporting From Trenches: Using Cassandra Effectively
+http://www.slideshare.net/peas2bees/cassandrasummit2015usingcassandraeffectively
+
+* Russell Spitzer – Spark Cassandra Connector: Past, Present, and Future
+http://www.slideshare.net/RussellSpitzer/spark-cassandra-connector-past-present-and-future
+
+* Robbie Strickland – Lambda at Weather Scale
+http://www.slideshare.net/rastrick/lambda-at-weather-scale-cassandra-summit-2015
+
+* Sebastián Estévez – Lessons from >100 Startups
+http://www.sestevez.com/sestevez/curriculum/dse/summit-2015/build/asciidoc/deckjs/slides.html
+
+* Ben Bromhead – Securing Cassandra
+http://www.slideshare.net/BenBromhead/cassandra-and-security
+
+* Benjamin Lerer – A deep look at the cql where clause
+http://www.slideshare.net/BenjaminLerer1/a-deep-look-at-the-cql-where-clause-53138465
+
+* Roopa Tangirala – Netflix’s Big Leap from Oracle to C*
+http://www.slideshare.net/RoopaTangirala/netflixs-big-leap-from-oracle-to-cassandra
+
+* Jeff Jirsa – Real World DTCS For Operators
+http://www.slideshare.net/JeffJirsa1/cassandra-summit-2015-real-world-dtcs-for-operators
+
+* Martin Zapletal – Cassandra as event sourced journal for big data analytics
+http://www.slideshare.net/AnirvanChakraborty1/cassandra-as-event-sourced-journal-for-big-data-analytics
+
+* Joel Knighton – Testing Cassandra Guarantees under Diverse Failure Modes with Jepsen
+http://www.slideshare.net/jkni/testing-cassandra-guarantees-under-diverse-failure-modes-with-jepsen-53168992
+
+* Joe Stein – Real-time Log Analysis with Apache Mesos, Kafka and Cassandra
+http://www.slideshare.net/charmalloc/realtime-log-analysis-with-apache-mesos-kafka-and-cassandra
+
+* Julien Anguenot – Leveraging Cassandra for real-time multi-datacenter public cloud analytics
+http://www.slideshare.net/anguenot/leveraging-cassandra-for-realtime-multidatacenter-public-cloud-analytics
+
+* Jon Haddad – Enter the Snake Pit for Fast and Easy Spark
+http://www.slideshare.net/JonHaddad/enter-the-snake-pit-for-fast-and-easy-spark
+
+* Peter Nichol – Why DBaaS is taking off with Cassandra
+http://www.slideshare.net/planetcassandra/instaclustr-why-dbaas-is-taking-off-with-cassandra
+
+* Rob Bagby & Jesus Aguilar – Building a massively scalable system with DataStax and Microsoft’s next generation Paas infrastructure
+http://www.slideshare.net/planetcassandra/microsoft-building-a-massively-scalable-system-with-datastax-and-microsofts-next-generation-paas-infrastructure
+
+* Vinay Sridhar – Persistent Memory and Cassandra
+http://www.slideshare.net/planetcassandra/sandisk-persistent-memory-and-cassandra
+
+* Kiyu Gabriel & Adam Mollenkopf – When and Where are all the Things: Geotemporal IoT Search and Analytics
+http://www.slideshare.net/planetcassandra/datastax-and-esri-geotemporal-iot-search-and-analytics
+
+* Frank Ober & Al Tobey – 3D XPoint and NVME Technology Cassandra Storage Comparison
+http://www.slideshare.net/planetcassandra/intel-and-datastax-3d-xpoint-and-nvme-technology-cassandra-storage-comparison
+
+* Vlad Giverts – Building Large Scale Machine Learning Pipelines
+http://www.slideshare.net/planetcassandra/workday-building-large-scale-machine-learning-pipelines
+
+* Victor Anjos – Cassandra Installation to Optimization
+http://www.slideshare.net/planetcassandra/ficstar-software-cassandra-installation-to-optimization
+
+* Ben Whitehead & Robert Stupp – A New Way to Run Cassandra
+http://www.slideshare.net/planetcassandra/mesosphere-and-contentteam-a-new-way-to-run-cassandra
+
+* Stephen Mallette – What’s New in Apache TinkerPop
+http://www.slideshare.net/planetcassandra/whats-new-in-apache-tinkerpop-the-graph-computing-framework
+
+* Chris Fregly – Real time Advanced Analytics with Spark and Cassandra
+http://www.slideshare.net/cfregly/cassandra-summit-sept-2015-real-time-advanced-analytics-with-spark-and-cassandra-recommendations-machine-learning-graph-processing
+
+* Luke Tillman – Relational Scaling and the Temple of Gloom
+http://www.slideshare.net/LukeTillman/relational-scaling-and-the-temple-of-gloom-from-cassandra-summit-2015
+
+* Joe Stein – Real-Time Log Analysis with Apache Mesos, Docker, Kafka, Spark, Cassandra, and Solr at scale
+http://www.slideshare.net/charmalloc/realtime-log-analysis-with-apache-mesos-kafka-and-cassandra
+
+* Gustavo Rene Antunez & Carlos Rolo – My First 100 days with a Cassandra Cluster
+http://www.slideshare.net/planetcassandra/pythian-my-first-100-days-with-a-cassandra-cluster
+
+* Aki Colovic – Skinny on Wide Rows
+http://www.slideshare.net/planetcassandra/signal-digital-the-skinny-on-wide-rows
+
+* Ben Slater – When and how to migrate from a relational database to Cassandra
+http://www.slideshare.net/planetcassandra/instaclustr-when-and-how-to-migrate-from-a-relational-database-to-cassandra
+———————–
+
+Image references
+
+https://twitter.com/aaronmorton/status/648333415138246656
+
+https://twitter.com/PlanetCassandra/status/647081335689900032
+
+https://twitter.com/DataStax/status/646755309369868290
+
+https://twitter.com/DataStax/status/646501543810875392
+
+https://twitter.com/LukeTillman/status/646365406093946884

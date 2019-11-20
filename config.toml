@@ -1,0 +1,4 @@
+baseURL = "http://adamhutson.com/"
+languageCode = "en-us"
+title = "Adam Hutson"
+theme = "ananke"

@@ -1,0 +1,141 @@
+---
+title: "Cassandra Conceptual Data Modeling"
+slug: cassandra-conceptual-data-modeling
+url: cassandra-conceptual-data-modeling
+date: 2016-05-10
+draft: false
+---
+= Cassandra Conceptual Data Modeling
+
+image::/images/SchedulingConceptualDataModel-Final.png[]
+
+The task of a data modeler is to create order out of chaos without excessively distorting the truth.  
+The finished product should be a data model that describes the structure, manipulation and integrity aspects of the data to be stored.  
+To properly create a data model, the modeler will transform said chaos through three distinct stages.  
+The first is a Conceptual Data Model, then a Logical Data Model, and lastly, a Physical Data Model.  
+This post will cover only the first data model, Conceptual.  
+There will be following posts on the Logical and Physical data models.  
+It will also walk through the creation of a full blown conceptual data model for a service scheduling application to be built with a Cassandra backend.
+
+== Conceptual Data Model
+
+Conceptual data models describe the semantics of the scope of the data.  
+This type of model is a map of concepts, their relationships and constraints.  
+It first involves creating entity classes with characteristic attributes.  
+Then relationship assertions are created about associations between entity classes.  
+If any constraints are present on the relationships, then those are defined as well.
+
+For example, a Person could be categorized as an entity class.  
+That generic class of Person could have characteristic attributes of name, gender, and age.  
+We might then establish that a Person could have a relationship to another person. 
+That relationship might be via genealogy or marriage.  
+This is the beginning of a conceptual data model.  
+Note that it has nothing to do specifically with a database.  
+Rather, it’s just a conceptual schema, also known as an entity-relationship diagram.
+
+== Diagramming Conceptual Data Models
+
+Conceptual modeling was developed by https://en.wikipedia.org/wiki/Peter_Chen[Peter Chen] in a paper written in 1976.  
+In part of his paper, Chen described which graphical representations to use for entities,  relationships, and attributes.  
+From those representations, we have the basis of how to graphically map out conceptual relationships.  
+In Chen notation, as it is referred to, an entity is represented by a rectangle, a relationship by a diamond, and an attribute by an oval.
+
+Recall the above examples of a Person is a parent/child to another Person, or a Person is married to another Person.  
+The following two drawings show those conceptual data models in Chen notation:
+
+image::/images/ConceptualDataModelExamples-ParentChild.png[]
+
+image::/images/Conceptual+Data+Model+Examples-4.png[]
+
+The above diagrams show a couple different things.  
+First, by reading it from left to right, you see that a Person is a parent to multiple or no children, indicated by the N above the relationship line.  
+And reading it from right to left, a Person is a child of two and only two parents, indicated by the 2 above the relationship line.  
+The second diagram shows that a person can be married to one and only one person.  
+Also notice that the relationship can also have attributes, as the Birth Date and Marriage Date indicates.
+
+These are the basic notational shapes for building Conceptual Data Models with the Chen Notation.
+
+== Conceptual Data Model for Cassandra
+
+To build a Conceptual Data Model for Cassandra, we should have a good subject to model.  
+This series of blog posts will focus on a single application.  
+That is the ability to schedule an appointment for a service.  
+For this application, we will need to define what all the objects, attributes, and relationships that are present around scheduling an appointment.
+
+The first part is a person, the client, who needs to schedule an appointment for a service.  
+The second part will be the service that is being scheduled.  
+The third will be the service provider.  
+The fourth will be the employees of the provider actually doing the service.  
+We’ll keep it just this simple at first and then build upon it in the future.
+
+*Client*
+
+The Client is an entity that will need to have:
+
+* Name
+* Phone Number
+* Gender
+* Can request multiple Service Appointments
+
+image::/images/SchedulingConceptualDataModel-Client.png[]
+
+*Service Appointment*
+
+The Service Appointment is a relationship that will need to have:
+
+* Appointment Date/Time
+* Service Stated Duration
+* Can be given to a single Client
+* Can be assigned by a single Service Provider
+* Can include a single Service
+* Can be worked by a single Service Provider Employee
+
+image::/images/SchedulingConceptualDataModel-ServiceAppointment.png[]
+
+*Service Provider*
+
+The Service Provider is an entity that will need to have:
+
+* Name
+* Phone Number
+* Can assign multiple Service Appointments
+* Can provide multiple Services
+* Can employ multiple Service Provider Employees
+
+image::/images/SchedulingConceptualDataModel-ServiceProvider.png[]
+
+*Services*
+
+The Services that are available for scheduling is an entity that will need to have:
+
+* Service Type
+* Service Name
+* Service Description
+* Service Suggested Duration
+* Can be provided by a single Service Provider
+* Can be performed by multiple Service Provider Employees
+* Can be included in multiple Service Appointments
+
+image::/images/SchedulingConceptualDataModel-Service.png[]
+
+*Service Provider Employees*
+
+The Employees of the Service Provider is an entity that will need to have:
+
+* Employee Name
+* Available Working Hours
+* Can be employed by a single Service Provider
+* Can perform to multiple Services
+* Can work multiple Service Appointments
+
+image::/images/SchedulingConceptualDataModel-ServiceProviderEmployee.png[]
+
+*Final Conceptual Model*
+
+image::/images/SchedulingConceptualDataModel-Final.png[]
+
+== Summary
+
+This post covered the basics of what a conceptual data model entails, how to diagram one, and showed an in-depth example of creating one.  
+This should give you a good foundation to build upon.  
+Please check back soon, as I continue this path of creating the next steps in this data model, the Logical and Physical.

@@ -1,0 +1,83 @@
+---
+title: "Update your Cassandra data model for 3.0"
+slug: update-your-cassandra-data-model-for-30
+url: update-your-cassandra-data-model-for-30
+date: 2016-05-04
+draft: false
+---
+= Update your Cassandra data model for 3.0
+
+image::/images/Cassandra-6-node-2.png[]
+
+Apache Cassandra version 3.0 was released in September 2015.  
+With the 3.0 release, some major updates to the storage engine and (long awaited) materialized views were introduced.  
+For a Data Modeler, the addition of views are something to jump up and down about.  
+However, over the last half year or so, many companies have been hesitant to make the jump from their trusted 2.1.x version.  
+By the end of this post, I hope to help you understand:
+
+* What new changes were introduced,
+* Why you want to upgrade,
+* How your data model will change,
+* Where you can test out a hosted 3.0 cluster.
+
+== What’s so great about 3.0?
+There are a lot of http://docs.datastax.com/en/cassandra/3.0/cassandra/features.html[new features] that were included in Cassandra 3.0.  
+The most notable was a major https://issues.apache.org/jira/browse/CASSANDRA-8099[storage engine rewrite] and the addition of https://issues.apache.org/jira/browse/CASSANDRA-6477[materialized views].
+
+The storage engine is what implements the read/write path of data.  
+This is the piece of code that interacts with SSTables that your data is stored in.  
+The original storage engine that Cassandra used was based off a legacy structure that wrote data out as cells.  
+With the introduction of CQL, the storage engine was always acting as a translation layer between CQL and CLI, the legacy syntax.  
+This translation led to constant inefficiencies in memory and garbage collection usage.
+
+Many of us will remember using Views in our relational database days.  
+The idea that data could be organized into different layouts for easier retrieval without having to specifically write it that way.  
+Of course, the idea of a view in Cassandra doesn’t correlate perfectly to a RDBMS, but the concept is intact.  
+In Cassandra, creating a materialized view actually creates a new table based off of an existing table.  
+When you write data to the original table, the data automatically flows to the new table.  
+Now you can retrieve data from either the original table or the view’s table.
+
+== Why should I upgrade?
+
+Simple, it increases your read/write speed & potentially will reduce your application code.
+
+It’s faster.  
+Since the storage engine doesn’t have to be backwards compatible with CLI, it allows reads/writes to flow much faster to/from disk.  
+Not only is the read/write path faster, but it’s more efficient with using your machine’s resources.  
+Reads are no longer having to read into memory more data than necessary just to organize it for translation.  
+That leads to more memory being left available to be used for your row/key cache.  
+Writes are no longer having to be reorganized between network to disk.  
+That leads to freed up cycles for garbage collection.  
+Your infrastructure engineer will thank you.
+
+It’s reduces code.  
+Before the introduction of views, if you wanted to search the same data using similar but different keys, then you had to explicitly write that data twice.  
+This means that when you changed the data in one of the tables, you had to make sure that you kept the other table(s) in sync.  
+The responsibility of this was on your application developer.  
+Now with views, you only have to write to the original table.  
+All the new data, and later updates, will automatically flow to the view table(s).  
+Your application developer will thank you.
+
+Think of how much faster your Cassandra cluster will respond.  
+Think of all of the lines of application code that can be removed.  
+Think of all the round trips to the database that your application doesn’t have to make.  
+Upgrade to 3.0, it’s a no-brainer.
+
+=== How does 3.0 affect my data model?
+
+Materialized views are your new best friend.  
+Imagine a data model that has you storing a customer’s address and you need to retrieve all customers by their customer_id and also by state and by city and by street name.  
+In versions of Cassandra previous to 3.0, you would need to create the customer_address table and then 3 additional tables (customer_address_by_state, customer_address_by_city, & customer_address_by_street) to satisfy all of the search requirements.  
+That’s four inserts for every new address that is created.  
+And every time John Doe moves and you have to update their address, that’s four updates that you have to coordinate.  
+Or deleting an address, that’s four deletes you’re executing.  
+That’s quite a bit of client-side overhead for what should be a very simple data model.
+
+With the release of Cassandra 3.0, the same scenario has you only creating a single table and three materialized views.  
+Now when you insert a new address, it’s only for the customer_address table.  
+Any of the data in the views are kept in sync on the server-side.  
+Your client doesn’t have to worry about any of it.  
+If the address is updated or deleted, the data just flows to the views.  
+It’s all done on the Cassandra node, not a single line of code is needed on the client.  
+That’s money in the bank.  
+Every time your application developer has to refactor code around that the customer_address table, it’s only one spot, not four, that needs to be altered.

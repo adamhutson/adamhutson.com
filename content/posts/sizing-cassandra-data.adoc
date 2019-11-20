@@ -1,0 +1,170 @@
+---
+title: "Sizing Cassandra Data"
+slug: sizing-cassandra-data
+url: sizing-cassandra-data
+date: 2016-06-29
+draft: false
+---
+= Sizing Cassandra Data
+
+image::/images/data-caliper.jpg[]
+
+*Size does matter.*  
+One of the basic tasks of a Data Modeler is to know how big your data is going to get.  
+You need to provide estimates of how much disk your model will consume.
+
+*How fast is it coming?*  
+Another basic task is to know how fast your data is flowing inbound.  
+Figuring out how quickly, or slowly, it will grow is important for capacity planning.  
+With Cassandra, estimating the size and velocity of your data can be made simple by using a few algorithms.
+
+== Sizing Your Raw Data
+In order to size your raw data, you need to have a good physical data model established.  
+By knowing your primary key(s) and data types for each column, then calculating your anticipated row size is just a couple formulas away.  
+This process is something you’ll need to calculate for every table in your model, so be prepared to spend some time on this subject.
+
+In order to size your data, you will need to take into account the three following things:
+
+* Column data & overhead
+* Row data & overhead
+* Index data & overhead
+
+=== Column Data & Overhead
+Every column stored in Cassandra has 15 bytes devoted to overhead.  
+Along with that there will be a varying amount of disk for the size of it’s name & value.  
+The breakdown for the mysterious 15 bytes is as follows.  
+The name requires 2 bytes, a flag that requires 1 byte, a timestamp that requires 8 bytes, and finally the value requires 4 bytes.
+
+[source,bash]
+column_size = column_name_size + column_value_size + 15
+
+If the column is a counter type or an expiring column, then add 8 more bytes.  
+Note, that a column can never have both a counter & be expiring.  
+The counter requires 8 bytes for the timestamp of the last delete.  
+The expiring requires 4 bytes for the TTL and 4 bytes for local deletion time.
+
+[source,bash]
+column_size = column_name_size + column_value_size + 15 + 8
+
+=== Row Data & Overhead
+
+Every row stored in Cassandra has 23 bytes devoted to overhead.  
+Each row will have it’s own varying amount of disk devoted to how many columns are filled on the row and the data type that is stored.  
+A cool feature of Cassandra is that not every column in a row has to have a value.  
+The downside to that is that column metadata must be stored with every row.
+
+[source,bash]
+row_size = row_value_size + 23
+
+=== Index Data & Overhead
+
+Every table has to maintain an index on it’s primary key, a.k.a. partition index.  
+This index increases linearly as rows are added.
+
+[source,bash]
+partition_index = number_of_rows * (average_key_size + 32)
+
+== Sizing for a Single Partition
+
+In Cassandra, partitions are how data is divided around the cluster.  
+Each piece of data has a partition key associated with it.  
+That partition key gets hashed and that hashed value becomes the token for cluster placement.  
+All data that gets added to that partition is stored on the same “row” on disk.
+
+Different versions of Cassandra have different limits on how many values can be stored in a single partition.  
+In the earlier days, C* 2.0 and earlier, partitions were limited to roughly 100 MB and could only hold about 100,000 values.  
+Cassandra 2.1 introduced new limitations on partitions.  
+Now a partition can hold hundreds of megabytes and the capacity for number of values has grown to hundreds of thousands.  
+The hard limit is now over 2 billion rows per partition key.
+
+=== Values per Partition
+
+There are two formulas to calculate the number of values for a given partition. 
+The first formula is for tables that contain clustering keys.  
+There is a pre-check to do first.  
+If it’s not zero, then use the first formula, otherwise use the second formula.  
+The second formula is for tables that have a single column partition key.
+
+[source,bash]
+Pre-Check:
+if 
+    0 != number_of_total_columns - number_of_partition_key_columns - number_of_clustering_key_columns - number_of_static_columns
+then 
+    GOTO Formula 1
+else 
+    GOTO Formula 2
+
+[source,bash]
+Formula 1:
+    number_of_values = avg_number_of_rows * (number_of_total_columns - number_of_partition_key_columns - number_of_clustering_key_columns - number_of_static_columns) + number_of_static_columns
+
+[source,bash]
+Formula 2:
+    number_of_values = avg_number_of_rows + number_of_static_columns
+
+=== Size per Partition
+
+There is no perfect way to predict what the size of a partition will be, but the following formula will provide an estimate.  
+You can then use this estimate for planning cluster size and growth.
+
+[source,bash]
+size_of_partition = total_size_of_partition_key_columns + total_size_of_static_columns + number_of_rows_in_partition * (total_size_of_regular_columns + total_size_of_clustering_columns) + 8 * number_of_values
+
+== Clusters and Replication
+
+Now that we know how to calculate the size of a tables columns & rows, and we also know how many rows we anticipate, we can think about how this affects our cluster via replication.  
+In Cassandra, a replication strategy determines the nodes where replicas are placed.  
+The total number of replicas across the cluster is referred to as the replication factor (RF).  
+A RF of 1 means that only one copy of each row on one node.  
+A RF of 2 has 2 copies, and so on.  
+So if you’ve determined that your table will have 100 GBs of data initially, and you’ve set your RF to 3, then your cluster will actually have 300 GBs of data for that single table.
+
+== Knowing Your Growth Rate
+
+Time to think a bit your business model.  
+Are you at the beginning of a growth curve, or are you enjoying a constant, slow growth?  
+These types of factors will help you plan a cluster for growth.  
+Maybe you have a steady flow of data.  
+Potential use cases that come to mind are stock market values by minute or clicks on a website per session.  
+Maybe your growth is in batches and grows with every new client you sign on, increasing your data footprint by a predictable amount.
+
+The goal is to put a multiplier on each tables’ size.  
+Every table can potentially grow at different rates.  
+A user table may grow slow, but the user_actions table may grow at three times faster.
+
+== Planning for Growth
+
+Now that you know your rate of growth, try to project out a couple of years.  
+This will help you predict when you’ll need to grow your cluster, and pre-think how big your nodes will be.  
+Ideally, you’ll know what your data size will be initially, and then in yearly increments for hopefully 5 years out.
+
+A side-benefit of this is that it will help with planning cluster sizes, and possibly help with deciding if your locating it on bare-metal or in a cloud provider.  
+Some businesses have a hard time provisioning new servers in a timely manner or finding space for them in their current data center.  
+Sometimes it’s easier to let a cloud provider do the heavy lifting on the infrastructure.
+
+== Optimizations
+
+Once you have a good idea of your growth rate, you need to consider if your row count ever hit the hard limits of Cassandra.  
+Will it go beyond 2 billion columns?  
+I know this sounds impossible, but some use cases can potentially hit that value.  
+If that’s the case, you’ll need to make tweaks to your table design. 
+Sometimes adding a more granular bucket in the primary key will greatly reduce the number of columns per partition.
+
+Will all of the columns in your table always be accessed?  
+Sometimes it’s better to put lesser accessed columns into a separate table to help speed access up to the primarily needed columns.  
+Maybe some of your columns are overly large (i.e. blob data).  
+Those columns would also benefit from being split off to additional tables.
+
+The opposite can also be true, though.  
+Are you querying on the same filter to get different columns of data in multiple tables?  
+Those tables are good candidates to be merged into a single table.  
+This is a trial and error process.  
+It could speed up your round trips to the database, but could also slow down the overall speed of the query.  
+Always test out your designs to see what fits your data model.
+
+== Summary
+
+By this point, you should have a good grasp on what it takes to size raw data, estimate the number of values per partition, and are thinking about data growth.  
+I realize that sizing data can be daunting.  
+If you ever have questions on anything discussed in any of my blogs, please reach out to me.  
+You can find me on Twitter and LinkedIn.

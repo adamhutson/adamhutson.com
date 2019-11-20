@@ -1,0 +1,321 @@
+---
+title: "Cassandra Physical Data Modeling"
+slug: cassandra-physical-data-modeling
+url: cassandra-physical-data-modeling
+date: 2016-06-15
+draft: false
+---
+= Cassandra Physical Data Modeling
+
+The task of a data modeler is to create order out of chaos without excessively distorting the truth. 
+The finished product should be a data model that describes the structure, manipulation and integrity aspects of the data to be stored. 
+To properly create a data model, the modeler will transform said chaos through three distinct stages. 
+The first is a Conceptual Data Model, then a Logical Data Model, and lastly, a Physical Data Model.
+
+The first two posts, Conceptual Data Model and Logical Data Model, in this series have been published.  
+This third post, the series finale, will be on the Physical data model.  
+It will build upon the information learned in the Conceptual and Logical Data Model posts.  
+Finally, it will  walk through the creation of a full blown physical data model for a service scheduling application to be built with a Cassandra backend.
+
+== Physical Data Model
+
+Physical data models continue the momentum created during the design of the Conceptual and Logical data models.  
+The main objective is to apply the constraints of your chosen database management system.  
+The physical model will describe table structure using syntax which includes data types, keys, & relationships.  
+This means that an accurate use of data type is needed for entity columns.  
+Typically, we also need to mind the use of reserved words to avoid them in naming entities and columns.
+
+== Diagramming Physical Data Models
+
+To continue our simple example model around Person entities, we now need to determine what the data types will be for each of the columns. 
+The keys should use ‘uuid’ data types as they are globally unique to ensure there will never be conflicts.  
+Remember the data is completely distributed, so it prevents us from trying to use an auto-incrementing value.  
+The rest of the columns are rather normal from most any DBMS.
+
+[source,sql]
+CREATE TABLE person (
+    person_id uuid PRIMARY KEY,
+    age int,
+    gender text,
+    name text             
+);
+
+This simple table is a great start.  
+But we need to be able to show a person in relation to another person.  
+The Logical model has a many-to-many table for relations.  
+That works  great in relational databases as tables can be joined server-side.  
+However, joins are currently not supported in Cassandra. 
+So we will need to have query-based tables instead of entity-based. 
+We need to think how will the data be searched and shown in the application. 
+For this, we will combine our previously modeled, entity-based tables into query-centric tables.
+
+[source,sql]
+CREATE TABLE children_by_parent (
+    parent_id uuid,
+    child_id uuid,
+    parent_name text,
+    parent_age int,
+    parent_gender text,
+    child_name text,
+    child_age int,
+    child_gender text,
+    PRIMARY KEY (parent_id, child_id) 
+) WITH CLUSTERING ORDER BY (child_id ASC);
+
+[source,sql]
+CREATE parents_by_child (
+    child_id uuid,
+    parent_id uuid,
+    child_name text,
+    child_age int,
+    child_gender text,
+    parent_name text,
+    parent_age int,
+    parent_gender text,
+    PRIMARY KEY (child_id, parent_id) 
+) WITH CLUSTERING ORDER BY (parent_id ASC);
+
+With the above two tables, we can search by either the parent or child unique identifier.  
+Respectively we can retrieve either the associated children to that parent, or the parents to that child.  
+So we have taken the spirit of the Logical Data Model and applied the constraints of Cassandra to the achieve a Physical Data Model.
+
+== Physical Data Model for Cassandra
+
+Now that we’ve established what the Physical data model is, let’s write one intended for Cassandra using our earlier modeled scheduling application.
+
+*Client*
+
+[source,sql]
+CREATE TABLE client (
+    client_id uuid PRIMARY KEY,
+    gender text,
+    name text,
+    phone_number text
+);
+
+This simple table is great if all I want to search by is the client’s unique identifier.  
+But how often is someone going to actually know that value.  
+Let’s create a couple similar tables that has the same information.  
+But now let’s allow us to search by a value that is readily known, phone number or name.
+
+[source,sql]
+CREATE TABLE client_by_phone_number (
+    phone_number text,
+    client_id uuid,
+    name text,
+    gender text,
+    PRIMARY KEY (phone_number, client_id)
+) WITH CLUSTERING ORDER BY (client_id ASC);
+
+[source,sql]
+CREATE TABLE client_by_name (
+    name text,
+    client_id uuid,
+    phone_number text,
+    gender text,
+    PRIMARY KEY (name, client_id)
+) WITH CLUSTERING ORDER BY (client_id ASC);
+
+With either of these tables we can search by phone_number or name, respectively.  
+However, those values may not be completely unique.  
+There could be two clients that are using the same phone number (i.e. siblings with the same home phone).  
+There could be many clients with the same name.  
+We don’t want our data model to only allow a single row in these cases, so I added a compound primary key that also includes client_id.  
+The end result is that if you search and there are multiple values, then you will retrieve all the records with that value.
+
+*Service Appointment*
+
+[source,sql]
+CREATE TABLE service_appointment ( 
+    service_appointment_id uuid PRIMARY KEY,
+    appointment_datetime timestamp,
+    client_id uuid,
+    service_id uuid,
+    service_provider_employee_id uuid,
+    service_provider_id uuid,
+    service_stated_duration int
+);
+
+Here we are again, with a table that has all of our data and does satisfy the Logical Data Model, but doesn’t make sense from a search perspective.  
+Remember, Cassandra can only search on the fields in the PRIMARY KEY.  
+So unless the person searching knows the unique identifier for the service appointment, they can’t do much with this table.  
+We need to structure this data around common search values, like possibly appointment time, or by the client’s phone number.  
+Those are likely to be needed.
+
+[source,sql]
+CREATE TABLE service_appointment_by_appointment_datetime (
+    appointment_datetime timestamp,
+    service_appointment_id uuid,
+    service_stated_duration int,
+    client_id uuid,
+    service_id uuid,
+    service_provider_employee_id uuid,
+    service_provider_id uuid,
+    PRIMARY KEY (appointment_datetime, service_appointment_id)
+) WITH CLUSTERING ORDER BY (service_appointment_id ASC);
+
+This seems like a much better table.  
+However, having all of those unique identifiers for the client, service, employee, etc don’t really help us out.  
+With that structure, we’re going to have to take those values and re-query the database to retrieve that info.  
+Not good from a performance stand point.  
+No reason to make multiple round trips on the network to the database if we can prevent it.  
+Let’s add that information directly to this table.
+
+[source,sql]
+CREATE TABLE service_appointment_by_appointment_datetime (
+    service_appointment_datetime timestamp,
+    service_appointment_id uuid,
+    service_appointment_stated_duration int,
+    client_id uuid,
+    client_name text,
+    client_age int,
+    client_gender text,
+    client_phone_number text,
+    service_id uuid,
+    service_name text,
+    service_suggested_duration int,
+    service_type text,
+    service_description text,
+    service_provider_employee_id uuid,
+    service_provider_employee_name text,
+    service_provider_employee_working_hours text,
+    service_provider_id uuid,
+    service_provider_name text,
+    service_provider_phone_number text,
+    PRIMARY KEY (appointment_datetime, service_appointment_id)
+) WITH CLUSTERING ORDER BY (service_appointment_id ASC);
+
+Notice, we still have the basic query structure in place, we’ve just added more information to the row so that we have everything we need without searching more tables.  
+This is a common denormalization trick from data warehousing.  
+Let’s create a similar table that allows searching by the client’s phone number.
+
+[source,sql]
+CREATE TABLE service_appointment_by_client_phone_number (
+    service_appointment_datetime timestamp,
+    service_appointment_id uuid,
+    service_appointment_stated_duration int,
+    client_id uuid,
+    client_name text,
+    client_age int,
+    client_gender text,
+    client_phone_number text,
+    service_id uuid,
+    service_name text,
+    service_suggested_duration int,
+    service_type text,
+    service_description text,
+    service_provider_employee_id uuid,
+    service_provider_employee_name text,
+    service_provider_employee_working_hours text,
+    service_provider_id uuid,
+    service_provider_name text,
+    service_provider_phone_number text,
+    PRIMARY KEY (client_phone_number, appointment_datetime, service_appointment_id) 
+) WITH CLUSTERING ORDER BY (appointment_datetime DESC, service_appointment_id ASC);
+
+But wait, what is going on there with the ORDER BY statement?  
+This table will allow for all client’s appointments to be retrieved with their phone number.  
+In order to show all of the appointments in a logical manner, the ORDER BY has them listed in descending order, denoted by the DESC.  
+This will give us the latest appointment time for the client.  
+Also the service appointment unique identifier is included to guarantee uniqueness.
+
+*Service Provider*
+
+[source,sql]
+CREATE TABLE service_provider (
+    service_provider_id uuid PRIMARY KEY,
+    name text,
+    phone_number text
+);
+
+By now, you should be getting the hang of what I’m doing here.  
+Take the table that is defined in the Logical Data Model, and switching the columns around to satisfy different search paths.  
+Nothing really too exciting, just more use cases to search by.
+
+[source,sql]
+CREATE TABLE service_provider_by_name (
+    name text,
+    service_provider_id uuid,
+    phone_number text,
+    PRIMARY KEY (name, service_provider_id) 
+) WITH CLUSTERING ORDER BY (service_provider_id ASC);
+
+[source,sql]
+CREATE TABLE service_provider_by_phone_number (
+    phone_number text,
+    service_provider_id uuid,
+    name text,
+    PRIMARY KEY (phone_number, service_provider_id) 
+) WITH CLUSTERING ORDER BY (service_provider_id ASC);
+
+*Services & Service Provider Employees*
+
+[source,sql]
+CREATE TABLE service (
+    service_id uuid PRIMARY KEY,
+    description text,
+    name text,
+    service_provider_id uuid,
+    suggested_duration int,
+    type text
+);
+
+[source,sql]
+CREATE TABLE service_provider_employee (
+    service_provider_employee_id uuid PRIMARY KEY,
+    name text,
+    service_provider_id uuid,
+    working_hours text
+);
+
+This one is an interesting case, because these two tables have what’s called a many-to-many table in the relational world.  
+That means that there are many services that a service provider employee can perform and that a service may be performed by many service provider employees.  
+We have to be careful when implementing this into the physical data model, so that we don’t restrict this relationship.  
+This use case would need to be, “What employees can perform a particular service?” and “What services can a particular employee perform?”
+
+[source,sql]
+CREATE TABLE service_provider_employee_by_service_name (
+    service_id uuid,
+    service_description text,
+    service_name text,
+    service_provider_id uuid,
+    service_suggested_duration int,
+    service_type text,
+    service_provider_employee_id uuid PRIMARY KEY,
+    service_provider_employee_name text,
+    service_provider_employee_working_hours text,
+    PRIMARY KEY (service_name, service_provider_employee_name, service_provider_employee_id)
+) WITH CLUSTERING ORDER BY (service_provider_employee_name ASC, service_provider_employee_id ASC);
+
+[source,sql]
+CREATE TABLE services_by_service_provider_employee_name (
+    service_provider_employee_id uuid,
+    service_provider_employee_name text,
+    service_provider_employee_working_hours text,
+    service_id uuid,
+    service_description text,
+    service_name text,
+    service_provider_id uuid,
+    service_suggested_duration int,
+    service_type text,
+    PRIMARY KEY (service_provider_employee_name, service_name, service_id)
+) WITH CLUSTERING ORDER BY (service_name ASC, service_id ASC);
+
+== Final Physical Data Model
+
+In the other posts in this series, I’ve included a combined view of the post’s particular data model.  
+This post on the Physical data model is different though.  
+The final product of the Physical data model is just a script.  
+This script should be runnable on your targeted Cassandra platform.  
+I say targeted, because every version of Cassandra is slightly different, with features being added and deprecated.  
+Ideally, the script will be idempotent, meaning that you can run it multiple times without error and the output is the same as the first run.  
+The final product of this post is a single script, located here, for you to download, examine, run, and learn from.
+
+== Summary
+
+This is the conclusion to my series on Data Modeling.  
+I’ve taken you through the three steps of constructing a proper data model.  
+You should understand the differences between the Conceptual, Logical, and Physical Data Models now.  
+Also, you should have a pretty good grasp on how to construct a solid Physical Data Model that is designed for Cassandra.  
+If you’re still interested in Data Modeling, please check out my Cassandra Data Model Basics post.  
+Also, don’t miss the things you want to know when upgrading your model to Cassandra version 3.0.
