@@ -1,0 +1,5 @@
+---
+title: "Contact"
+slug: contact
+---
+how to get ahold of me
