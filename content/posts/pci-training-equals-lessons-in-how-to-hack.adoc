@@ -1,0 +1,14 @@
+---
+title: "PCI Training Equals Lessons In How To Hack"
+slug: pci-training-equals-lessons-in-how-to-hack
+url: pci-training-equals-lessons-in-how-to-hack
+date: 2011-03-17
+draft: false
+---
+Today at work, all developers were required to take an all-day training in PCI. 
+This is the second such session that I’ve attended since I was hired. 
+It’s all very interesting to learn about, however, it really boils down to hacking. 
+They are teaching us all the methods that we (our websites) can be hacked. 
+The surprising part is how much my co-workers already know about how to attack a site. 
+We discussed how we would attack something and then talked about the pros and cons for each type. 
+All in all, great way to spend a day at work.

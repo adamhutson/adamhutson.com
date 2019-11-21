@@ -1,0 +1,96 @@
+---
+title: "House Of The Rising Scrum"
+slug: house-of-the-rising-scrum
+url: house-of-the-rising-scrum
+date: 2014-10-07
+draft: false
+---
+Yes, I’m having fun with my blog titles twisting classic song titles. 
+Get used to it, I think I’ll keep doing it.
+
+Fire Fighting
+After a couple of weeks at the new job, I noticed that there wasn’t really any direction to how issues were being addressed. 
+It seemed like whatever the current fire was or whoever was pestering the loudest was getting their issue addressed first. 
+This also meant that current issues being worked were being dropped for the latest “emergency” issue. 
+Not exactly an ideal way to develop software (or build anything, for that matter).  
+It felt like being a fire fighter, just answering the call for latest fire that needed putting out.
+
+Almost immediately, I started pushing to change the team dynamics. 
+I wanted my team to use a Scrum board to track their issues. 
+Also, I wanted them to have quick stand-up meetings every day to let each other know where they were with each issue. 
+A few on the team had tried this approach before (they had a previous project that used this method). 
+Of those users, half of them hated it and the other half loved it. 
+However, all agreed that the project implementation was a failure.
+
+With a little persuading, I was able to get them to try the process again. 
+Now, introducing a development team to the Agile process can be a very polarizing activity. 
+People either love it or they hate it. 
+Rarely are there any “meh” attitudes towards using Agile. 
+With this team, I already had a split decision on members buying in to it. 
+So, I decided to take it in baby steps.
+
+Scrum Task Board
+The first step is introducing the team to a Scrum Task board. 
+What is a Scrum Task board, you ask?  
+In its simplest form, it is a grid of rows for short-term tasks using columns to show progress towards completion.  
+But in reality, it’s a quick visual display for the team to see where they fall with their current issues.  
+It helps to figure out what’s issues are done, what issue you’re currently working on and what issue is next.  
+Below is a very simple example (image borrowed from here):
+
+A generic scrum task board
+
+Choosing a medium for your scrum task board is up to you and your team.  
+First, you need to find a common area that everyone can easily see.  
+You don’t want to create your task board in an far-flung area or a low-traffic area.  
+It should be out in the open so that everyone, not just your team, can see what’s being worked on.  
+Next, you need to decide what medium you’ll use for your tasks.  
+The 2 most common that I’m aware of are Post-It notes and 3×5 index cards using thumb-tacks or magnets.  
+While making this decision, you’ll need to decide what surface you’ll display your board on.  
+This could be a window, wall, side of a filing cabinet, whiteboard … creativity is your only limitation.
+
+My personal choice for Scrum task board is to use Post-Its on a portable whiteboard with 1/4″ tape to draw out the grid.
+
+Daily Stand-up Meeting
+The second step is scheduling the team to have a 15 minute stand-up meeting every morning.  
+The purpose of this meeting is to tell each other what you completed yesterday, what you’re working on today and what, if any, blockers you currently have.  
+This allows the team members to stay abreast of each other’s issues and adds accountability to each team member.  
+Below is an example of a stand up at the task board (image borrowed from here):
+
+
+
+Sprints
+With an Agile development methodology, work is broken down into sprints.  
+A Sprint is a predefined length of time to accomplish a set number of issues.  
+Now, I didn’t want my team to get too bogged down in all the aspects of Agile just yet.  
+I had loosely used the word “Sprint” a couple of times and noticed that I had a few puzzled stares.  
+Without going into too much detail, I told them that the amount of time that we allotted to our scrum board was called a Sprint.  
+And that that length of time was up to us, the team, to decide.
+
+Early Adoption
+From my experience, a sprint is ideally 2-3 weeks long.  
+However, I wanted my team to get the feel for the complete cycle of work quickly.  
+I decided to have the team do a quick 5 day sprint.  
+It was a Friday morning and we were deciding the issues that we would work on.  
+So it made sense to have the following week, Monday through Friday, be our first official Sprint.  
+Remember, some of the team had ill feeling towards the Scrum process.  
+So I wanted to get some early positive points up for hopefully a long-standing Agile process.
+
+Sprint 1: 5 Days
+Because of existing projects, this first sprint, there would be only three of us available to work on issues.  
+Luckily, myself and the two other developers were already fans of Agile.  
+So hopefully, we can show a positive, unified presence of a successful scrum for the other members to see.  
+We accepted 13 issues into the sprint.  
+At the end of it, we were able to deliver 8 issues to our production environment.  
+The remaining 5 issues were descoped due to external blockers or scope creep.  
+Since we don’t have a formal Product Owner monitoring a product backlog, we are relying on an issue tracking system which allows the reporter to alter the problem and scope at any time.  
+We’ll need to work on that aspect in the next sprint and only accept issues that are more stable.
+
+Sprint 2: 10 Days
+After the first successful sprint, we lengthened the sprint days to a full two weeks, or 10 days.  
+Still it’s only three of us that are available to work, but so far, the two others are feeling more confident about their work and what’s expected.  
+We have accepted 10 issues into the sprint this time.  
+With a longer sprint, we felt we could deliver a couple of more lengthy, time-consuming issues.  
+Hopefully, this sprint will also be a success.
+
+Things To Come
+Once the team is comfortable with our board and stand-ups, I’ll introduce them to retrospective meetings, planning poker, and hopefully find some more team members to add to the sprint process.

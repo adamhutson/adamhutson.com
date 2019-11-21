@@ -1,0 +1,36 @@
+---
+title: "New Addition To The Family"
+slug: new-addition-to-the-family
+url: new-addition-to-the-family
+date: 2011-03-15
+draft: false
+---
+It’s been entirely too long since my last post.  
+The last time I posted I had just started my new job and was blogging about the experience and silly setup reminders for myself.  
+It’s been about 9 months and I am still loving Expedia!  
+I have a great management team supporting me.  
+And they like to have fun; the company held an off-site in Las Vegas, at the Palazzo for three days.  
+It really is the most challenging and rewarding position I’ve had in my career.  
+However, outside of work, I’ve had a lot going on, to say the least.
+
+In January, we welcomed our 4th child into our family.  
+She has been keeping us all very busy.  
+Now that she’s 7 weeks old now, she is just starting to smile and coo a bit.  
+I just wanted to share a quick picture of one of those rare moments that her face just lit up.
+
+Besides the birth, we recently listed our home for sale.  
+It’s surprisingly difficult to fit a family of six into a three bedroom house.  
+We’ve also discovered that having four children causes you to outgrow vehicles as well.  🙂  
+Guess I’ll be shopping for a large SUV soon (or maybe a short bus, HA).
+
+If that wasn’t enough, I’ve also been finishing up about a year long contract for some Business Intelligence software for a company in the SW US.  
+With an extra 15-20 hours / week, it will be a needed relief to have it finalized.  
+It’s a Windows Presentation Foundation (WPF) front end, C# middle, connecting to SQL Server database warehouse.  
+I have to say I’ve really enjoyed developing WPF over Windows Forms.  
+Working with XAML, the development cycle went very quickly.
+
+Looking to the future, I have to admit, I’ve already got my next project lined up.  
+I’m going online for this one and tackling the MVC pattern.  
+Stay tuned.  
+It should be a fun experience as I’m going to try to adopt the 37signals way of simple design.  
+Their REWORK book has been bouncing around my head for a while now and I’d like to start a new project with it in mind.

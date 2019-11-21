@@ -1,0 +1,14 @@
+---
+title: "Free Ebook: Don't Just Roll The Dice"
+slug: free-ebook-dont-just-roll-the-dice
+url: free-ebook-dont-just-roll-the-dice
+date: 2009-12-17
+draft: false
+---
+One of the blogs that I follow is the Business Of Software, by Neil Davidson.  
+Neil is the co-founder and joint CEO of Red Gate Software and the organizer of the Business of Software conference.  
+Back in October, Neil released a free eBook, Don’t Just Roll the Dice.  
+It’s a useful, short book on how to price software.  
+It includes theory, practical advice and case studies so that software pricing isn’t a roll of the dice.
+
+You can download a pdf version of the eBook here.

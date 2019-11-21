@@ -1,0 +1,33 @@
+---
+title: "Autorecover Sql Scripts"
+slug: autorecover-sql-scripts
+url: autorecover-sql-scripts
+date: 2010-06-16
+draft: false
+---
+This morning, when I came into work, I discovered that Windows Update had graciously restarted my machine for me. 
+No big deal. 
+But wait, then I realized I had some SQL work that I hadn't saved yet. 
+NOOOOOO!!! 
+I know, I know, ... always save your work. 
+But yesterday, I didn't. 
+So you can imagine how irritated I was to discover that all of that hard work was gone. 
+Or so I thought.
+
+A co-worker heard me getting mad at myself and chimed in that SQL Server Management Studio (SSMS) has an autorecover feature. 
+WHAT!? 
+Yep, when ever you start typing a query in SSMS, a file is automatically created and saves itself every 5 minutes. 
+The location of this AutoRecover document is located in "\My Documents\SQL Server Management Studio\Backup Files\Solution [n]\". 
+The [n] represents an integer that corresponds to how many SSMS IDE windows you have open. 
+I only had one IDE open, with two query windows open, so I had a "\Solution 1\" folder with two files in it: ~AutoRecover.~vs47E8.sql & ~AutoRecover.~vsD5FD.sql.
+
+Try it out. 
+Open the folder mentioned above and open a new SSMS IDE and Query window and start typing out a quick SELECT. 
+After about 5 minutes, you will see a new file prefixed with "~AutoRecover.~vsXXXX.sql". 
+The X's are alphanumeric values that change with every file. 
+The new file will get auto saved in 5 min increments from there on. 
+When you close SSMS or a query window and it asks you if you want to save, click No, and watch the auto-generated file delete itself.
+
+Wow, that was a HUGE relief. 
+SSMS 2005 and higher has this feature built in. 
+Thank you Microsoft for saving me from my own carelessness.

@@ -1,0 +1,13 @@
+---
+title: "First Microsoft Certification Exam"
+slug: first-microsoft-certification-exam
+url: first-microsoft-certification-exam
+date: 2010-04-19
+draft: false
+---
+I've signed up to take my first Microsoft Certification exam.  
+I will be taking the MCTS Exam 70-433: SQL Server 2008 Database Development exam.  
+The date is scheduled for May 26th with 3 hours allotted.  
+I'm hoping that it'll be a breeze, since I've been writing TSQL for so long, but I'm still nervous.  
+I've been reading the Training Kit on it and it's a really quick read.  
+Wish me luck.

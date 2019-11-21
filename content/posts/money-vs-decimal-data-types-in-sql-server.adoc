@@ -1,0 +1,125 @@
+---
+title: "Money Vs Decimal Data Types In Sql Server"
+slug: money-vs-decimal-data-types-in-sql-server
+url: money-vs-decimal-data-types-in-sql-server
+date: 2009-11-20
+draft: false
+---
+Last week, one of our developers asked us in the DBA group what our standard was for currency columns.  
+My first thought was DECIMAL(19,4), but I couldn’t give a reason why it was standard.  
+I knew MONEY was essentially the same definition, but had heard that it was dangerous to use.  
+Suspecting a rounding issue, I began with a simple test.
+
+DECLARE
+    @dOne DECIMAL(19,4),
+    @dThree DECIMAL(19,4),
+    @mOne MONEY,
+    @mThree MONEY
+SELECT
+    @dOne = 1,
+    @dThree = 3,
+    @mOne = 1,
+    @mThree = 3
+SELECT
+    @dOne / @dThree * @dThree AS DecimalResult,
+    @mOne / @mThree * @mThree AS MoneyResult
+
+--------------------------------------------------------------------
+DecimalResult  MoneyResult
+1.000000       0.9999
+
+Interesting!  
+Why did the MONEY type get truncated?  
+So another quick query gave me the output precision and scale.
+
+SELECT
+    SQL_VARIANT_PROPERTY(@dOne / @dThree * @dThree, 'basetype') AS DecimalBasetype,
+    SQL_VARIANT_PROPERTY(@dOne / @dThree * @dThree, 'precision') AS DecimalPrecision,
+    SQL_VARIANT_PROPERTY(@dOne / @dThree * @dThree, 'scale') AS DecimalScale,
+    SQL_VARIANT_PROPERTY(@mOne / @mThree * @mThree, 'basetype') AS MoneyBasetype,
+    SQL_VARIANT_PROPERTY(@mOne / @mThree * @mThree, 'precision') AS MoneyPrecision,
+    SQL_VARIANT_PROPERTY(@mOne / @mThree * @mThree, 'scale') AS MoneyScale
+
+-------------------------------------------------------------------------------------------
+DecimalBasetype  DecimalPrecision  DecimalScale  MoneyBasetype  MoneyPrecision  MoneyScale 
+Decimal          38                6             money          19              4          
+
+The decimal is now a DECIMAL(38,6) and the MONEY is still a DECIMAL(19,4).  
+Hmmm.  
+Why did one change and the other didn’t change. 
+
+For an answer, I started digging into MSDN for precision & scale of data types.  
+I came across this article.  
+It had a fantastic table that described it.
+
+Operation
+
+Result precision
+
+Result scale *
+
+e1 + e2
+
+max(s1, s2) + max(p1-s1, p2-s2) + 1
+
+max(s1, s2)
+
+e1 - e2
+
+max(s1, s2) + max(p1-s1, p2-s2) + 1
+
+max(s1, s2)
+
+e1 * e2
+
+p1 + p2 + 1
+
+s1 + s2
+
+e1 / e2
+
+p1 - s1 + s2 + max(6, s1 + p2 + 1)
+
+max(6, s1 + p2 + 1)
+
+e1 { UNION | EXCEPT | INTERSECT } e2
+
+max(s1, s2) + max(p1-s1, p2-s2)
+
+max(s1, s2)
+
+e1 % e2
+
+min(p1-s1, p2 -s2) + max( s1,s2 )
+
+max(s1, s2)
+
+* The result precision and scale have an absolute maximum of 38. 
+When a result precision is greater than 38, the corresponding scale is reduced to prevent the integral part of a result from being truncated.
+
+
+So let’s expand on the first calculation, @dOne / @dThree * @dThree, which is actually two calculations, division and then multiplication.
+
+e1 / e2 = DECIMAL(19,4) / DECIMAL(19,4)
+
+precision = p1 – s1 + s2 + max(6, s1 + p2 + 1) = 19 – 4 + 4 + max(6, 4 + 19+ 1) = 43
+
+scale = max(6, s1 + p2 + 1) = max(6, 4+19+1) = 24
+
+So that leaves us with a DECIMAL (43,24) for the division portion, which is not a legal data type.  
+So SQL subtracts 5 from the precision to get the 43 down to a 38, and a matching 5 from the scale, which leaves us with a DECIMAL(38,19).
+
+e1 * e2 = DECIMAL(38,19) * DECIMAL(19,4)
+
+precision = p1 + p2 + 1 = 38 + 19 + 1 = 58
+
+scale = s1 + s2 = 19 + 4 = 23
+
+This leaves us with a DECIMAL(58,23) which is also an illegal data type.  
+So, again, SQL subtracts 20 from the precision to get the 58 down to a 38, and a matching 20 from the scale, which leaves us with a DECIMAL(38,3).  
+But wait, there is an undocumented rule that if the scale is being lowered by this process, it is never lowered below 6.  
+So we actually end up with a DECIMAL(38,6). 
+
+With the second calculation, @mOne / @mThree * @mThree, all of the results are cast back to a MONEY or DECIMAL(19,4) which truncates data and is why we lose the accuracy of our scale.
+
+What did we learn, … Don’t use the MONEY datatype in SQL Server.

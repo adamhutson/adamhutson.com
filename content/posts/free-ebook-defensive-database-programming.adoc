@@ -1,0 +1,24 @@
+---
+title: "Free Ebook: Defensive Database Programming"
+slug: free-ebook-defensive-database-programming
+url: free-ebook-defensive-database-programming
+date: 2010-06-14
+draft: false
+---
+Simple-Talk Publishing has released a new free eBook: Defensive Database Programming with SQL Server, by Alex Kuznetsov.
+
+The goal of Defensive Programming is to produce resilient code that responds gracefully to the unexpected. 
+To the SQL Server programmer, this means T-SQL code that behaves consistently and predictably in cases of unexpected usage, doesn't break under concurrent loads, and survives predictable changes to database schemas and settings.
+
+Too often as developers, we stop work as soon as our code passes a few basic tests to confirm that it produces the 'right result' in a given use case. 
+We do not stop to consider what other possible ways in which the code might be used in the future, or how our code will respond to common changes to the database environment, such as a change in the database language setting, or a change to the nullability of a table column, and so on.
+
+This book is filled with practical, realistic examples of the sorts of problems that beset database programs, including: 
+Changes in database objects, such as tables, constraints, columns, and stored procedures.
+Changes to concurrency and isolation levels.
+Upgrades to new versions of SQL Server.
+Changes in requirements.
+Code reuse.
+Problems causing loss of data integrity.
+Problems with error handling in T-SQL.
+You can download the eBook in PDF format here.

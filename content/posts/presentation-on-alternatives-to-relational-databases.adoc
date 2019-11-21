@@ -1,0 +1,13 @@
+---
+title: "Presentation On Alternatives To Relational Databases"
+slug: presentation-on-alternatives-to-relational-databases
+url: presentation-on-alternatives-to-relational-databases
+date: 2011-11-10
+draft: false
+---
+Tonight, I’m presenting to a CISQ 250 class at Drury University.  
+The topic of the presentation is “Alternatives to Relational Databases”.
+
+The following is my presentation in SlideShare.net:
+
+Alternatives to Relational Databases

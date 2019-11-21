@@ -1,0 +1,15 @@
+---
+title: "Won A Pluralsight Subscription"
+slug: won-a-pluralsight-subscription
+url: won-a-pluralsight-subscription
+date: 2010-11-23
+draft: false
+---
+Tonight, at my local .NET User’s Group meeting, I was lucky enough to win a 1-year subscription to PluralSight On-Demand!  
+The subscription was one of the give-aways that the group was doing.  
+I am really fortunate to have won it, too.  
+With my new job that focuses on Database side of development, I’ve been getting a little rusty at my coding skillset.  
+The standard subscription lets me have full access to over 70 .NET Courses, which is $499 value!  
+I guess I have one more thing to be thankful for this Thanksgiving.  
+I can’t wait to start watching the how-to videos and courses.  
+Thank you to my local .NET User’s Group for having awesome swag.

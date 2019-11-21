@@ -1,0 +1,32 @@
+---
+title: "Too Many Todos And Not Enough Dones"
+slug: too-many-todos-and-not-enough-dones
+url: too-many-todos-and-not-enough-dones
+date: 2010-06-17
+draft: false
+---
+I love taking on new projects, and I'm a do-it-yourself kind of person. 
+If there is something that needs to be done around the house, I don't hire it out, I do it myself. 
+It's not just physical stuff, either. 
+That DIY mentality applies to everything in my life … doing taxes, starting businesses, writing websites/software, & designing logos. 
+I really try to tackle all of these things myself.
+
+However, as of lately, I've been feeling stretched really thin; too thin, actually. 
+My "To Do" list hasn't been getting items moved over to the "Done" side very quickly. 
+Two of the bigger items on that list have been a pair of websites, my personal website and my wife's business website, that both need similar functionality. 
+I've written both from scratch and included a lot of really cool features on both. 
+But the features are always taking me more & more time to add which is taking away from being able to get anything else done. 
+The biggest feature is a blog engine. 
+Now I know there are a ton of free blogging services out there, but I was really enjoying writing my own and figuring out all the nuances. 
+And it has been a really fun challenge. 
+But I need to let them go.
+
+So I am deciding to change my focus a bit and give up control of having to do everything myself. 
+That means that I will be transitioning both of the websites over to WordPress. 
+It'll cost a little bit more money than what it currently does, but the opportunity cost of being able to work on other things will far outweigh cost of switching over. 
+Plus I'll have more time to actually write content for the blog instead of the piping for it. 
+And my wife will absolutely love the WordPress app for her iPhone. 
+That alone should be the biggest reason to move.
+
+With this change I will be losing some of my pride of creativity and accomplishment, but honestly, I'll get those back with my next project. 
+Move two more "To Dos" over to the "Done" column.

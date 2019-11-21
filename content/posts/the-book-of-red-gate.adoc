@@ -1,0 +1,21 @@
+---
+title: "The Book Of Red Gate"
+slug: the-book-of-red-gate
+url: the-book-of-red-gate
+date: 2010-05-05
+draft: false
+---
+I’m a pretty big fan of RedGate.  
+I use a few of their products almost religiously.  
+Their SQL Compare product is probably the most used tool in my toolbox.  
+I follow their blogs & evangelists, regularly consume their free eBooks, and generally admire the company as a whole.  
+Their “Ingeniously Simple” mantra is really what keeps me coming back.  
+I even started to apply for a job there once.  
+However, the small requirement to live in England killed it for me.  
+So it’s no surprise that I would read The Book of Red Gate.
+
+It’s not so much a book, as it’s a compilation of all things that RedGate represents and the day-to-day nuances that is RedGate.  
+It’s also the quickest 76 pages that I’ve ever read.  
+All in all, it’s a fun short book that is an insight to what goes on around the RedGate campus.
+
+You can download a pdf version of the eBook here.

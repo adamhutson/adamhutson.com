@@ -1,0 +1,64 @@
+---
+title: "Puzzle Solved"
+slug: puzzle-solved
+url: puzzle-solved
+date: 2009-11-20
+draft: false
+---
+I have been really getting into RSS feeds lately and have subscribed to alot of ones that interest me.   
+I personally have been using the Google Reader on the iGoogle homepage.  
+It's a neat way to keep tabs on my varied readings.  
+One that caught my eye was a challenge by Pinal Dave.   
+Pinal challenged his readers to solve a puzzle that would return the size of each index for a speficied table. 
+
+He started with a simple sp_spaceused [tableName] command that returned the index_size of the table and a selection from sys.indexes that returned a list of all of the indexes on said table.  
+But it was up to his readers to figure out how to get the index_size of each index, so that the sum of all of them would add up to teh result from sp_spaceused.  
+Read the article to follow along.  
+My answer is the 7th down (mine is simpler and suprising different from the other answers).  
+Pinal will post the solution with due credit on his blog.  
+Hopefully, I did well, seeing that he has almost 11 million readers.
+
+Here is a quick overview of the puzzle:
+
+
+
+
+
+My answer was:
+DECLARE
+      @objname nvarchar(776),
+      @id int
+
+SELECT
+      @objname = 'TableToExamine',
+      @id = object_id(@objname)
+
+SELECT
+      i.*,
+      CASE
+            WHEN ps.usedpages > ps.pages THEN (ps.usedpages - ps.pages)
+            ELSE 0
+      END * 8 indexsize
+FROM sys.indexes i
+INNER JOIN (
+      SELECT
+            OBJECT_ID,
+            index_id,
+            SUM (used_page_count) usedpages,
+            SUM (
+                  CASE
+                        WHEN (index_id < 2) THEN (in_row_data_page_count + lob_used_page_count + row_overflow_used_page_count)
+                        ELSE lob_used_page_count + row_overflow_used_page_count
+                  END
+            )pages
+      FROM sys.dm_db_partition_stats
+      WHERE object_id = @id
+      GROUP BY object_id, index_id
+) ps on i.index_id = ps.index_id
+WHERE i.object_id = @id
+
+Well, that wasn't my exact answer.  
+I had a variable declaration that I really didn't need, but hey, I did it in like 5 mins.  
+So this version is a little cleaner. :)
+
+ENJOY!  And in the spirit of fun, See if you can do it better!

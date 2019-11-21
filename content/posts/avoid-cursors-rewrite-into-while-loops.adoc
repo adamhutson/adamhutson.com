@@ -1,0 +1,57 @@
+---
+title: "Avoid Cursors, Rewrite Into While Loops"
+slug: avoid-cursors-rewrite-into-while-loops
+url: avoid-cursors-rewrite-into-while-loops
+date: 2009-10-22
+draft: false
+---
+A few months back, we had a stored proc at work that was using CURSORs pretty heavily.  
+It had CURSORs inside of CURSORs.  
+This proc was one of our oldest, biggest, and most involved procs at over 2050 lines.  
+On larger clients, it could be called thousands of times a day.  
+All of the cursors were FAST_FORWARD types, which should have at least been somewhat performance friendly. 
+However they were SELECTing from tables that had triggers which implicitly converted the cursor type to be STATIC.  
+That's not good, because it was locking up the SELECTed table and causing all kinds of headaches.
+
+So the decision was made to rewrite it to use table variables and WHILE LOOPs.  
+This sped the proc up immensely, as measured by elapsed time, at the cost of using more in-process memory. 
+You see, when a CURSOR is used, it basically creates a temp table on TempDB and iterates through it.  
+With a STATIC cursor, the selected table has locks placed on it in the transaction tables.  
+The CURSOR alternative is to create a table variable containing the rows that would have gone in the CURSOR and use a counter variable to loop through it using the IDENTITY column on the table variable.  
+It's still row-by-row processing, but it's faster, more efficient, and doesn't lock.  
+The only downside is that it will use more RAM.  
+So beware if you're using SQL 2000, SQL Express, or an MSDE version as you may see performance degrade if the sqlservr process hits it's memory ceiling. 
+
+I don't think I need to say this, but will anyway.   
+Changing CURSORs into WHILE LOOPs are better, but CURSORs into a set-based query is best.  
+It's always best to do a query in a single batch as opposed to row-by-row.
+
+CURSOR code:
+
+DECLARE @SomeID INT
+DECLARE myCursor CURSOR LOCAL FAST_FORWARD FOR
+    SELECT DISTINCT SomeID
+    FROM dbo.TableA 
+    WHERE ID = @ID
+OPEN myCursor
+FETCH NEXT FROM myCursor INTO @SomeID
+WHILE(@@FETCH_STATUS <> -1)
+BEGIN
+    --do activity
+END
+
+TABLE VARIABLE, WHILE/LOOP code:
+
+DECLARE @rowCount INT, @currentRow INT, @SomeID INT
+DECLARE @tableVariable TABLE (RowID INT IDENTITY(1,1), SomeID INT NULL)
+INSERT INTO @tableVariable(SomeID)
+    SELECT SomeID 
+    FROM dbo.TableA 
+    WHERE ID = @ID
+SELECT @rowCount = @@RowCount, @currentRow = 1
+WHILE @currentRow<=@rowCount
+BEGIN
+    SELECT @SomeID = SomeID FROM @tableVariable WHERE RowID = @currentRow
+    --do activity
+    SET @currentRow = @currentRow + 1
+END

@@ -1,0 +1,14 @@
+---
+title: "Finding The Last Reboot Time Of A Sql Server"
+slug: finding-the-last-reboot-time-of-a-sql-server
+url: finding-the-last-reboot-time-of-a-sql-server
+date: 2009-10-27
+draft: false
+---
+Here is a quick way to find the last reboot date and time of a SQL Server instance.
+
+For SQL Server 2000 or 2005, use:
+SELECT crdate FROM master.dbo.sysdatabases WHERE name = 'tempdb'
+
+For SQL Server 2008, use:
+SELECT sqlserver_start_time FROM master.sys.dm_os_sys_info

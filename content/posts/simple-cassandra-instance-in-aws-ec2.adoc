@@ -1,0 +1,195 @@
+---
+title: "Simple Cassandra Instance In AWS EC2"
+slug: simple-cassandra-instance-in-aws-ec2
+url: simple-cassandra-instance-in-aws-ec2
+date: 2014-10-24
+draft: false
+---
+= Simple Cassandra Instance In AWS EC2
+
+I’ve been doing Cassandra development in an enterprise setting for quite a while now.  
+And being a good little development shop (Expedia), we had Chef set up to deploy stuff for us, including Cassandra installation.  
+Chef is great at doing just that.  
+The downside to that is that you forgot the details of how to install Cassandra manually.  
+Here are the steps to spin up an EC2 instance and getting a single instance of Cassandra running on it.
+
+== AWS setup
+First of all, you must have an http://aws.amazon.com/[Amazon Web Services] (AWS) account to do this. 
+Just do it, you’ll thank me once you see all the cool things you can do with it. 
+Once you’re signed up, log into the AWS console and go to the EC2 dashboard.  
+Click on the big “Launch Instance” button (I know, they make it easy, huh).  
+My personal preference is CentOS, but you can pick whatever flavor of Unix you like.  
+I typically go to the AMI Marketplace over the Community AMI area.  
+I know I can trust the marketplace, whereas the other, I can’t trust to not have extra bloat pre-installed.  
+From the Marketplace, I select the latest version of CentOS.  
+In this case, CentOS 6.5.
+
+The next step is to select your instance size.  
+This decision can affect your wallet greatly.  
+AWS offers a free tier for new users to have a micro instance running non-stop for free for the first year.  
+Now, since I’m way past the first year on my AWS usage, I’ll only pay a couple cents per hour for use.  
+But if you’re not careful, you can rack up a pretty good sized bill.  
+I went with a m1.small instance.
+
+== Connect to EC2
+Once you have your Linux VM up and running in EC2, you’ll need to connect to it.  
+If you’re on a Mac, you can simply “ssh” into it.  
+If you are on a PC, then you’ll need to download a third-party tool to connect.  
+I like using “cmder”, available http://bliker.github.io/cmder/[here].  
+It’s probably the most similar to “ssh-ing” from a Mac.  
+The following is my connection.  
+Note, I have a pem file that I’m passing to it.  
+This is the public/private key that you can set up.  
+Highly advise using this method to get in and out of EC2 instances.
+
+[source,bash]
+ssh -i c:\adamhutson.pem root@ec2-54-91-46-126.compute-1.amazonaws.com
+
+== Java setup
+First thing, does your VM have Java 7 installed on it?  
+Run the following to find out:
+
+[source,bash]
+java -version
+
+If it’s not installed, as is the case with most vanilla CentOS images, you’ll receive the following response:
+
+[source,bash]
+-bash: java: command not found
+
+So we’ll need to download the JDK for Java 7 and install it.  
+Run the following:
+
+[source,bash]
+cd /opt/
+curl -b oraclelicense=accept-securebackup-cookie -O -L http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jdk-7u67-linux-x64.tar.gz
+tar xzf jdk-7u67-linux-x64.tar.gz
+cd /opt/jdk1.7.0_67/
+
+So now, we’ve downloaded and unzipped the JDK to the cd/opt/ folder, and then navigated into the new JDK folder.
+
+[source,bash]
+alternatives --install /usr/bin/java java /opt/jdk1.7.0_67/bin/java 2
+alternatives --config java
+alternatives --install /usr/bin/jar jar /opt/jdk1.7.0_67/bin/jar 2
+alternatives --install /usr/bin/javac javac /opt/jdk1.7.0_67/bin/javac 2
+alternatives --set jar /opt/jdk1.7.0_67/bin/jar
+alternatives --set javac /opt/jdk1.7.0_67/bin/javac
+
+Let’s re-check the version of Java now that we have the JDK 7 installed:
+
+[source,bash]
+java -version
+
+Should receive the following now:
+
+[source,bash]
+java version "1.7.0_67"
+Java(TM) SE Runtime Environment (build 1.7.0_67-b01)
+Java HotSpot(TM) 64-Bit Server VM (build 24.65-b04, mixed mode)
+
+Now we need to set up some environment variables:
+
+[source,bash]
+export JAVA_HOME=/opt/jdk1.7.0_67
+export JRE_HOME=/opt/jdk1.7.0_67/jre
+export PATH=$PATH:/opt/jdk1.7.0_67/bin:/opt/jdk1.7.0_67/jre/bin
+
+== Cassandra install
+We need  a place to store our Cassandra files that we will be downloading.  
+I choose to have a generic “cassandra” folder in the root.
+
+[source,bash]
+mkdir /cassandra
+cd /cassandra
+
+There are two different ways to run Cassandra.  
+The first is to download the tar and run it manually.  
+The other is to get an rpm and install it as a service.
+
+=== Option 1: Manually
+[source,bash]
+curl -OL http://www.apache.org/dist/cassandra/2.1.0/apache-cassandra-2.1.0-bin.tar.gz
+tar xzf apache-cassandra-2.1.0-bin.tar.gz
+cd apache-cassandra-2.1.0
+bin/cassandra -f
+
+Note the -f option that we passed the Cassandra binary. 
+This tell Cassandra to run and output messages to the foreground.  
+This is really nice to see what is going on.  
+You can also leave that -f option off and not see any output.  
+With it, you should receive a ton of output messages.  
+However, it will stop outputting and the last couple lines should be like the following: (Note the last line that it is “Listening for thrift clients”)
+
+[source,bash]
+INFO 14:33:44 Starting listening for CQL clients on localhost/127.0.0.1:9042...
+INFO 14:33:44 Binding thrift service to localhost/127.0.0.1:9160
+INFO 14:33:44 Listening for thrift clients...
+
+Now we have Cassandra running in the foreground, we’ll need to open a new tab and ssh into the box again. 
+If we hadn’t used that -f, you could have reused the same ssh connection as above.
+
+[source,bash]
+cd /cassandra/apache-cassandra-2.1.0
+bin/cqlsh
+
+We are now connected to that running instance of Cassandra via the cqlsh interface.  
+The following is the first part of the response for the cqlsh command line.
+
+[source,bash]
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 2.1.0 | CQL spec 3.2.0 | Native protocol v3]
+Use HELP for help.
+cqlsh>
+
+To stop this installation of Cassandra from running, it’s a two-step procedure.  
+First we grep to get the pid that it’s running under and then kill the pid.
+
+[source,bash]
+ps aux | grep cassandra
+kill 1234
+
+=== Option 2: As a service
+
+[source,bash]
+curl -OL http://rpm.datastax.com/community /noarch/cassandra21-2.1.0-1.noarch.rpm
+rpm -i cassandra21-2.1.0-1.noarch.rpm
+
+Should receive the following, letting you know that the service has started.
+
+[source,bash]
+service cassandra start
+Starting Cassandra: OK
+
+You can also query the service to see if it’s running:
+
+[source,bash]
+service cassandra status
+
+Should receive the following, with a different pid, of course:
+
+[source,bash]
+cassandra (pid 24356) is running...
+
+Let’s connect to it to see if it responds:
+
+[source,bash]
+cd /usr/bin
+cqlsh
+
+Should receive the following to know that you are now inside the cqlsh prompt interact with Cassandra data models:
+
+[source,bash]
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 2.1.0 | CQL spec 3.2.0 | Native protocol v3]
+Use HELP for help.
+cqlsh>
+
+It’s a service, so the normal service command are what you will use to stop it.
+
+[source,bash]
+service cassandra stop
+
+== Start using Cassandra
+That’s it.  
+Now go on your merry way and spin up your own.

@@ -1,0 +1,15 @@
+---
+title: "What Makes Up A Good Blog"
+slug: what-makes-up-a-good-blog
+url: what-makes-up-a-good-blog
+date: 2009-10-18
+draft: false
+---
+In starting this blog, I have to ask, What amount and kind of content makes up good blog?  
+My goal is for it to define me as a familyman, and professional.  
+It should be about what interests me.  
+That being technology, family, books, & thoughts.  
+I believe that it should reflect the balance in life in which I do all of those things.  
+For me, about 50% of my time is consumed by technology, 30% is enjoying family, and remaining 20% is split evenly between books & thoughts.  
+Hopefully, my content will be worthy of following.  
+Let me know if I need to include something else, or add/remove anything as I'm sure this will be a rough draft for content composition.

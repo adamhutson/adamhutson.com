@@ -1,0 +1,29 @@
+---
+title: "Free iPhone Development Training"
+slug: free-iphone-development-training
+url: free-iphone-development-training
+date: 2009-10-20
+draft: false
+---
+A few months ago, I was talking with a friend about programming on an iPhone.  
+We were discussing the potential audience that an iPhone commanded.  
+I didn't know much how the iPhone operated (I don't own one), however, it did pique my interest enough to research it a bit.  
+So, shortly after that conversation, I went to the Apple Dev Center and perused the Getting Started Documentation.  
+Well, it was more than a little confusing.  
+I'm a .NET developer and certainly didn't have a grasp on the iPhone or it's programming model.  
+Needless to say, I didn't make it very far in reading that initial documentation. 
+
+Last night, I was surfing blogs and came across David Hayden's blog.  
+He had an entry on iPhone development and again I was reminded that I didn't really give it my all in getting under the hood of the iPhone.  
+David's post pointed to free iPhone training by Stanford University on iTunes.  
+WHAT?!  
+FREE?!  
+So now I have downloaded the almost 24 hours of video and 17 PDFs.  
+This time I will give the iPhone the attention it deserves.  
+Hopefully, I'll be able to put together a Hello World app on an iPhone.  
+(Anyone want to let me borrow a Mac OS X and iPhone?!)
+
+Use the following link to find the free training.  
+It should either open iTunes and allow you to download the videos/PDFs, or it'll prompt you to install iTunes.
+
+http://deimos3.apple.com/WebObjects/Core.woa/Browse/itunes.stanford.edu.2024353965.02024353968

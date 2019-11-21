@@ -1,0 +1,32 @@
+---
+title: "Implicit Conversion Of Fast Forward Cursor To Static Cursor"
+slug: implicit-conversion-of-fast-forward-cursor-to-static-cursor
+url: implicit-conversion-of-fast-forward-cursor-to-static-cursor
+date: 2009-10-28
+draft: false
+---
+During the course of one of my last blog posts on Cursors, I ran across a niche piece of information that I didn't realize.  
+I had always read that FAST_FORWARD CURSORs were the fastest and least locking of the different CURSOR types.  
+What I didn't realize was that if the SELECT statement joins on one or more tables with a trigger table (INSERTED/DELETED), the CURSOR is converted to a STATIC CURSOR!  
+Unfortunately, most of the tables that I work with have some sort of trigger.  
+So this was really important information.  
+Read more about it in this MSDN article.
+
+Differences between STATIC and FAST_FORWARD CURSORs:
+They are both read-only concurrency model.  
+This means that no locks are held on the base table(s).  
+However, while fetching a cursor row, a Shared Lock will be acquired.  
+The Shared Lock can be avoided with a NOLOCK hint on the SELECT, or via isolation level.  
+However, once the row is fetched, the locks are released.
+STATIC:  Think of this as a snapshot of the result set.  
+When it is opened, a temporary table is created in tempdb, which adds additional pressure on the database. 
+It does not reflect any types of changes to the underlying database, such as INSERTs, UPDATEs, or DELETEs. 
+This is a read-only cursor that can go forward and backwards.
+There can be significant impact on server resources for creating, populating, and cleaning up the snapshot in the tempdb database.
+FAST_FORWARD:  This will create a fast forward-only, read-only cursor with performance optimizations enabled.  
+It can only go from the first row forward to the last row.  
+It operates directly on the base table(s).  
+Unlike a static cursor, rows are not retrieved from the database until they are fetched.  
+Any changes to a row (from INSERT, UPDATE, DELETE statements) before the row is fetched, will be reflected in the fetched row.
+
+Disclaimer:  If possible, avoid using cursors.

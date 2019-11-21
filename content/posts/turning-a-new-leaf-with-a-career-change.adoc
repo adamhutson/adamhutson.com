@@ -1,0 +1,30 @@
+---
+title: "Turning A New Leaf With A Career Change"
+slug: turning-a-new-leaf-with-a-career-change
+url: turning-a-new-leaf-with-a-career-change
+date: 2010-07-14
+draft: false
+---
+I started a new job this week. 
+I am working for Expedia, Inc now as a Database Development Engineer (or DB Dev, for short). 
+So far, I am really enjoying the opportunity. 
+The people are really great and have a real entusiasm for what they do.
+
+It’s a quicker pace for development releases than I’m used to, but it seems like they have a really good system of checks and balances to ensure the process is flawless. 
+I am learning that “Uptime” is the most important factor and that everything else comes in as second priority. 
+That’s such a different mentality to me. 
+My background has always been in the client-server world. 
+So we could shut the system down to make our changes/updates and then give the All Clear signal to let everyone in. 
+But not with a website that is running 24x7x365. 
+It the site is down even a few minutes, that’s lost revenue, which is unacceptable.
+
+The work is still similar from a database perspective, but every little change is scrutinized. 
+Can’t update a table in a large batch, it has to be done in iterations of 100 records or less so that it doesn’t lock too many data pages.
+
+Today, I was writing a multi-threaded query stress tool. 
+It’s going to be something that will compare all the CPU, read/write IO, & memory metrics for a defined number of iterations and threads. 
+We will be able to scale it up to simulate a real load on the database server. 
+We have to be concisous of every little change we implement, because a small change can get magnified when 50,000 users hit the system.
+
+Regardless of the details, I am LOVING my career change. 
+It’s refreshing to change everything.

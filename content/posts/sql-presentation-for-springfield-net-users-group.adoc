@@ -1,0 +1,14 @@
+---
+title: "Sql Presentation Fo Springfield .NET User's Group"
+slug: sql-presentation-for-springfield-net-users-group
+url: sql-presentation-for-springfield-net-users-group
+date: 2011-06-28
+draft: false
+---
+Tonight, I gave a presentation to the Springfield .NET Users Group.  
+I chose to present on SQL Server 2008 Development for Programmers.  
+I tried to keep it to a level 200 type class.
+
+The following is my presentation in SlideShare.net:
+
+SQL Server 2008 Development for Programmers

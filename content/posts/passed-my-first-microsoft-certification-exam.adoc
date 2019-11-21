@@ -1,0 +1,26 @@
+---
+title: "Passed My First Microsoft Certification Exam"
+slug: passed-my-first-microsoft-certification-exam
+url: passed-my-first-microsoft-certification-exam
+date: 2010-05-26
+draft: false
+---
+Today, I passed my first Microsoft Certification exam, MCTS exam 70-433!  
+With this certification, I am a Microsoft Certified Technology Specialist for SQL Server 2008 Database Development.
+
+Getting a MS cert has always been something that I always wanted to achieve, but I never thought I would have the time to study.  
+Well I signed up back in April and just knew that if I didn’t just do it, I probably never would.  
+I had a great book to read from.  
+It included an application that simulated the exam with practice tests.  
+I took quite a few of the practice tests before the exam day and never could pass one, so needless to say, I was very nervous.
+
+Once I was in the exam room, things seemed to get easier as I loosened up.  
+The questions were hard and quite a few were rather tricky.  
+Luckily, there was a review later checkbox at the top of each question that allowed me to go back after the test and review the ones that I was feeling unsure about.  
+That was the real key to passing, I think.  
+I went back through every question and re-read each word to make sure that I was fully understanding the question.  
+Honestly, I was able to change a few of my answers because of it.
+
+All in all, I would definitely do it again.  
+In fact, I am already thinking about my next cert.  
+But I think I’ll take the summer off to relax before I dive into that study mode again.

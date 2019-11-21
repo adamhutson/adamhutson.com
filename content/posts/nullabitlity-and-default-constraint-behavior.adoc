@@ -1,0 +1,35 @@
+---
+title: "Nullability And Default Constraint Behavior"
+slug: nullabitlity-and-default-constraint-behavior
+url: nullabitlity-and-default-constraint-behavior
+date: 2009-11-18
+draft: false
+---
+When adding a new column with a default constraint to an existing table, keep in mind what you want your existing records to contain.  
+If you add the new column and set it to be allow nulls, then all of the existing records will contain a NULL, and any inserted records will have the default value.  
+However, if you set new column’s nullability to be NOT NULL, then the existing records will get back-filled with the default value.
+
+Here is a quick sql snippet to show the behavior:
+
+CREATE TABLE Test (Id INT IDENTITY(1,1) NOT NULL, Name VARCHAR(10) NULL)
+INSERT Test (Name) VALUES ('you')
+INSERT Test (Name) VALUES ('me')
+SELECT * FROM Test
+ALTER TABLE Test ADD FlagNull BIT NULL CONSTRAINT DF_Test_FlagNull DEFAULT ((0))
+ALTER TABLE Test ADD FlagNotNull BIT NOT NULL CONSTRAINT DF_Test_FlagNotNull DEFAULT ((0))
+SELECT * FROM Test
+INSERT INTO Test (Name) VALUES ('us')
+SELECT * FROM Test
+Id  Name
+1   you
+2   me
+
+Id  Name  FlagNull  FlagNotNull
+1   you   NULL      0
+2   me    NULL      0
+
+Id  Name  FlagNull  FlagNotNull
+1   you   NULL      0
+2   me    NULL      0
+3   us    0         0
+As shown the FlagNull column has a NULL for the first 2 records as opposed to the FlagNotNull column has the default value for the same records.

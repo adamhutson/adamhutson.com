@@ -1,0 +1,33 @@
+---
+title: "Goal: Explore More Solutions Than Just WinForms"
+slug: goal-explore-more-solutions-than-just-winforms
+url: goal-explore-more-solutions-than-just-winforms
+date: 2009-10-21
+draft: false
+---
+It seems to me lately that I am continually writing, essentially, the same program for every problem.  
+The language has changed from VB6 to VB.NET to C#, but the pattern behind the design is the same.  
+It's always a Winform front end, common logic/objects in a middle dll, and data access from another dll that usually hits stored procedures on a SQL Server.  
+Not that it's a bad design, because it's not.  
+But I'm just afraid that I'm not growing as a developer.  
+I even use the same old design of a common starting point that calls a logical UI object that controls the flow to the user and back down to the database.  
+I guess it's considered a data centric design for n-tier architecture.
+
+The point is that I need more depth and breadth in my solutions.  
+Sure I can be an expert in this one area, but how often is another area a better solution to the problem.  
+What do I do when a client-server WinForm isn't the answer?  
+I should have a better understanding of the WebForm/Web application world and the design patterns they use.  
+The funny part is, I've had jobs where I've written to mobile devices and done middle/backend work on web apps; I've even done Javascript on an ASP.NET app.  
+I was doing my part in those development shops; Providing the needed code to get the job done.  
+I just never felt completely comfortable with anything but WinForms.  
+At least to the point where I would tackle one by myself.
+
+So here's a goal for myself: Explore more solutions than just WinForms.  
+My previous post on free iPhone development training should be a good starting point for completely thinking outside of the WinForm world.  
+I would ideally like to learn more about ASP.NET web apps and Silverlight.  
+Certainly the MVC design pattern deserves quite a bit of attention.  
+But I should also explore the new kid on the block in WinForms, WPF.  
+Anyway, it should be a fun journey and I'll surely have grown in the process.  
+I'll try to blog about what I'm doing to achieve this new goal.
+
+~Adam

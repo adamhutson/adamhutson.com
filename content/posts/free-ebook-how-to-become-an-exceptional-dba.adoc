@@ -1,0 +1,14 @@
+---
+title: "Free Ebook: How To Become An Exceptional DBA"
+slug: free-ebook-how-to-become-an-exceptional-dba
+url: free-ebook-how-to-become-an-exceptional-dba
+date: 2010-01-18
+draft: false
+---
+Brad McGehee is one of my more favorite authors of SQL literature. 
+How to Become an Exceptional DBA is one of his more popular books.  
+It’s really a career guide for novice and experienced DBAs, alike.  
+It shows step-by-step methods for how to differentiate yourself from the crowd.  
+Most of it is common sense, but it’s a good reminder for how to be an exceptional DBA.
+
+You can download a free pdf version of this eBook here.

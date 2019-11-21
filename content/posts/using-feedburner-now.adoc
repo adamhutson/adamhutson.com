@@ -1,0 +1,13 @@
+---
+title: "Using Feedburner Now"
+slug: using-feedburner-now
+url: using-feedburner-now
+date: 2010-04-20
+draft: false
+---
+I have moved my syndication feed over to feedburner.  
+For those of you that are subscribers, please update the links in your readers.  
+My new feed is http://feeds.feedburner.com/AdamHutson.  
+I will be rolling out a new website in the near future and the old feed will no longer be active.  
+I'll send out a last post as a reminder when it's officially closed.  
+Thanks for understanding.

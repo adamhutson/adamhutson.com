@@ -1,0 +1,43 @@
+---
+title: "Sql Server Memory Management"
+slug: sql-server-memory-management
+url: sql-server-memory-management
+date: 2009-10-30
+draft: false
+---
+Recently, I had the opportunity to brush up on my SQL Server memory tuning skills.  
+It's been a while since I needed them, but I thought I'd throw out what I used for someone else's future benefit.
+
+First, some background knowledge:
+There are different physical memory limits for each Windows release.
+The virtual address space (set of virtual memory addresses) is limited to 4 GB for 32-bit Windows.
+The virtual address space is divided into two 2 GB partitions: one for use by the processes and other reserved for use by the system.
+The address space (amount of physical memory) is limited to 2 GB for a 32-bit process.
+
+In tuning SQL Server, there are 3 key things to look at: Physical Address Extension (PAE), Address Windows Extensions (AWE), &  4 Gigabyte Tuning (4GT).
+
+Physical Address Extension (PAE) is a switch (/PAE) that is added to the boot.ini that allows an x86 processor to access and use more than 4GB of physical memory.  
+It's only used for 32-bit versions of Windows, as x64 processors can access more than 4 GB natively.  
+Most versions of Windows since 2000 Advanced Server support it.
+
+4 Gigabyte Tuning (4GT) is a switch (/3GB) that is added to the boot.ini that increases the processes portion of the virtual address space from 2 GB to 3 GB.  
+4GT will limit the available RAM to 16GB, so if the server has more than 16GB RAM, 4GT should not be used. 
+
+Address Windows Extensions (AWE) is a set of APIs that allows applications to access more than 4GB of RAM.
+
+Which ones to use is determined by how much RAM your server has.  
+Here is a general rule of thumb for what to use and when:
+
+RAM	USE
+4GB	/3GB
+8GB	/3GB, /PAE, AWE enabled
+16GB	/3GB, /PAE, AWE enabled
+>16GB	/PAE, AWE enabled
+Of course, doing research is part of the fun, so here are some references to keep handy:
+Memory Limits for Windows Releases:  http://msdn.microsoft.com/en-us/library/aa366778(VS.85).aspx
+4GT:  http://msdn.microsoft.com/en-us/library/bb613473(VS.85).aspx
+4GT Technical Reference:  http://technet.microsoft.com/en-us/library/cc778496(WS.10).aspx
+AWE:  http://msdn.microsoft.com/en-us/library/aa366527(VS.85).aspx
+PAE:  http://msdn.microsoft.com/en-us/library/aa366796(VS.85).aspx
+
+Happy tuning!

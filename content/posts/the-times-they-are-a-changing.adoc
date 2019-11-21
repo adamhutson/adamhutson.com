@@ -1,0 +1,33 @@
+---
+title: "The Times, They Are A Changing"
+slug: the-times-they-are-a-changing
+url: the-times-they-are-a-changing
+date: 2014-09-17
+draft: false
+---
+Wow, it’s been almost three years since I blogged about anything here.  
+I feel just a little bit bad about that, but honestly, it’s been a pretty busy time for me.  
+My last post was about Alternatives to Relational Databases … yep, I’ve definitely been in that world for a while now.  
+Back then, I was just starting to scratch the surface on what NoSQL even was.  
+Looking at that post, now I realize I didn’t know nearly enough on the subject.  
+Today, I can say I have a firm grasp of it.  
+The last three years has had me building out Cassandra nodes in Amazon’s AWS on a daily basis.
+
+But as the blog title implies, the times, they are a changing.  
+I’ve finally made the decision to leave all my comfortableness at Expedia and leap into a new position at a new place.  
+Today, I’m a Staff Database Architect for American National.  
+It’s an insurance company that’s been around for almost 110 years, so it’s got LOTS of data.  
+Which I love, because a huge volume of data is what really gets me interested.  
+The other thing that gets me interested is how that data is being used.  
+They have a really forward thinking CIO in place that is putting a heavy emphasis on leveraging that data in new ways.  
+So it sounded like a pretty exciting place to make my next career chapter.
+
+But what’s really in a title?  
+I kinda wondered the same thing.  
+I know what a Database Architect means, but “Staff”?  
+I’ve heard of Associate/Junior/Senior/Principal as job prefixes, but Staff is a new one for me.  
+I did some google-ing on the subject and didn’t really find anything.  
+Turns out, Staff is just American National’s top prefix in a job stack.  
+So, that has me feeling pretty good about myself and my ability to network/interview/negotiate a career change.  
+But, of course, now I have to fill those shoes.  
+Look for more blog posts later as I get into the bowels of new projects.

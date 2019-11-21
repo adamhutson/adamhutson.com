@@ -1,0 +1,25 @@
+---
+title: "Free Ebook: Introducing Microsoft Sql Server 2008 r2"
+slug: free-ebook-introducing-microsoft-sql-server-2008-r2
+url: free-ebook-introducing-microsoft-sql-server-2008-r2
+date: 2010-04-26
+draft: false
+---
+Microsoft Press has released a free ebook: Introducing Microsoft SQL Server R2, by Ross Mistry and Stacia Misner. 
+There are 10 chapters and 216 pages. 
+Here is a quick overview of the chapters:
+
+Chapter 1: SQL Server 2008 R2 Editions and Enhancements
+Chapter 2: Multi-Server Administration
+Chapter 3: Data-Tier Applications
+Chapter 4: High Availability and Virtualization Enhancements
+Chapter 5: Consolidation and Monitoring
+Chapter 6: Scalable Data Warehousing
+Chapter 7: Master Data Services
+Chapter 8: Complex Event Processing with StreamInsight
+Chapter 9: Reporting Services Enhancements
+Chapter 10: Self-Service Analysis with PowerPivot
+
+You can download the ebook in PDF format here.
+
+Update your readers to follow my new syndication feed at http://feeds.feedburner.com/adamhutson.

@@ -1,0 +1,48 @@
+---
+title: "Seconds Into DDHHMMSS Format"
+slug: seconds-into-ddhhmmss-format
+url: seconds-into-ddhhmmss-format
+date: 2010-02-17
+draft: false
+---
+Got a fun requirement today.  
+Using SQL, the developer needed to convert an integer representing seconds into the format of dd:hh:mm:ss.  
+So 125 seconds would be 00:00:02:05.
+
+I put together a quick script that creates a table variable, inserts some test values, and selects back out of it.
+
+DECLARE @ADAM TABLE(sec INT NULL)
+INSERT INTO @ADAM (sec) VALUES (125)
+INSERT INTO @ADAM (sec) VALUES (3600)
+INSERT INTO @ADAM (sec) VALUES (3605)
+INSERT INTO @ADAM (sec) VALUES (60000)
+INSERT INTO @ADAM (sec) VALUES (6000)
+INSERT INTO @ADAM (sec) VALUES (600)
+INSERT INTO @ADAM (sec) VALUES (86400)
+INSERT INTO @ADAM (sec) VALUES (86405)
+INSERT INTO @ADAM (sec) VALUES (172800)
+INSERT INTO @ADAM (sec) VALUES (172860)
+INSERT INTO @ADAM (sec) VALUES (172865)
+INSERT INTO @ADAM (sec) VALUES (1234567)
+INSERT INTO @ADAM (sec) VALUES (75654)
+SELECT RIGHT('0' + CONVERT(varchar(6), sec/86400),2)
++ ':' + RIGHT('0' + CONVERT(varchar(6), sec % 86400 / 3600), 2)
++ ':' + RIGHT('0' + CONVERT(varchar(2), (sec % 3600) / 60), 2)
++ ':' + RIGHT('0' + CONVERT(varchar(2), sec % 60), 2)
+FROM @ADAM
+
+Results
+-----------
+00:00:02:05
+00:01:00:00
+00:01:00:05
+00:16:40:00
+00:01:40:00
+00:00:10:00
+01:00:00:00
+01:00:00:05
+02:00:00:00
+02:00:01:00
+02:00:01:05
+14:06:56:07
+00:21:00:54

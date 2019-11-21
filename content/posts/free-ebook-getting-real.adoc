@@ -1,0 +1,19 @@
+---
+title: "Free Ebook: Getting Real"
+slug: free-ebook-getting-real
+url: free-ebook-getting-real
+date: 2009-12-03
+draft: false
+---
+37signals is one those companies that you just can’t help but notice.  
+And once you do, you won’t be able to keep from following them and their philosophies.  
+They are the guys that invented Ruby On Rails.  
+They follow the strict mantra that software products should be built with the least number of features possible.  
+Getting Real: The smarter, faster, easier way to build a successful web application is a new book written by the crew at 37signals.  
+This practical book details unconventional methods to deliver value, fresh perspectives, and inspiration. 
+At 200 pages, it’s a surprisingly quick read.  
+I read it the entire book from my iPhone while waiting at and in-between various appointments.  
+The book is made up of small essays that are easy to digest and understand.  
+It has amazing insight on building lean software that any starting company or entrepreneur will find immensely valuable.
+
+You can view a web version of this eBook here.

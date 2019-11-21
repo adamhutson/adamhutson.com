@@ -1,0 +1,11 @@
+---
+title: "Where Is The Immediate Window In Visual Studio"
+slug: where-is-the-immediate-window-in-visual-studio
+url: where-is-the-immediate-window-in-visual-studio
+date: 2010-07-20
+draft: false
+---
+Whenever I get a clean install of Visual Studio, I can never find the menu for displaying the Immediate Window for debugging code. 
+The keyboard shortcut for it is: Ctl + Alt + I
+
+This post is probably more for my own reference later, but maybe it will satisfy someone’s search.
