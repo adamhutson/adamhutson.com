@@ -14,9 +14,9 @@ pygmentscodefencesguesssyntax = true
     author = "Adam Hutson"
     description = "Adam Hutson's personal website"
     keywords = "blog,developer,personal"
-    info = "Data DevOps and Architect"
-    avatarurl = "images/avatar.jpg"
-    footercontent = "Jump and grow wings on the way down"
+    info = "Data Architect and DevOps "
+    avatarurl = "images/AdamHutson-Headshot-512x512.jpg"
+    #footercontent = "Jump and grow wings on the way down"
 
     dateformat = "January 2, 2006"
 
