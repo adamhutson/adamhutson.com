@@ -10,6 +10,7 @@ My first thought was DECIMAL(19,4), but I couldn’t give a reason why it was st
 I knew MONEY was essentially the same definition, but had heard that it was dangerous to use.  
 Suspecting a rounding issue, I began with a simple test.
 
+[source,sql]
 DECLARE
     @dOne DECIMAL(19,4),
     @dThree DECIMAL(19,4),
@@ -24,7 +25,7 @@ SELECT
     @dOne / @dThree * @dThree AS DecimalResult,
     @mOne / @mThree * @mThree AS MoneyResult
 
---------------------------------------------------------------------
+[source,sql]
 DecimalResult  MoneyResult
 1.000000       0.9999
 
@@ -32,6 +33,7 @@ Interesting!
 Why did the MONEY type get truncated?  
 So another quick query gave me the output precision and scale.
 
+[source,sql]
 SELECT
     SQL_VARIANT_PROPERTY(@dOne / @dThree * @dThree, 'basetype') AS DecimalBasetype,
     SQL_VARIANT_PROPERTY(@dOne / @dThree * @dThree, 'precision') AS DecimalPrecision,
@@ -40,7 +42,7 @@ SELECT
     SQL_VARIANT_PROPERTY(@mOne / @mThree * @mThree, 'precision') AS MoneyPrecision,
     SQL_VARIANT_PROPERTY(@mOne / @mThree * @mThree, 'scale') AS MoneyScale
 
--------------------------------------------------------------------------------------------
+[source,sql]
 DecimalBasetype  DecimalPrecision  DecimalScale  MoneyBasetype  MoneyPrecision  MoneyScale 
 Decimal          38                6             money          19              4          
 

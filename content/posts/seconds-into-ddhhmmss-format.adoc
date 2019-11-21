@@ -11,6 +11,7 @@ So 125 seconds would be 00:00:02:05.
 
 I put together a quick script that creates a table variable, inserts some test values, and selects back out of it.
 
+[source,sql]
 DECLARE @ADAM TABLE(sec INT NULL)
 INSERT INTO @ADAM (sec) VALUES (125)
 INSERT INTO @ADAM (sec) VALUES (3600)
@@ -31,8 +32,8 @@ SELECT RIGHT('0' + CONVERT(varchar(6), sec/86400),2)
 + ':' + RIGHT('0' + CONVERT(varchar(2), sec % 60), 2)
 FROM @ADAM
 
+[source,sql]
 Results
------------
 00:00:02:05
 00:01:00:00
 00:01:00:05
