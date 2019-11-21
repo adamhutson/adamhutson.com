@@ -2,7 +2,7 @@
 title: "What Makes Up A Good Blog"
 slug: what-makes-up-a-good-blog
 url: what-makes-up-a-good-blog
-date: 2009-10-18
+date: 2009-10-19
 draft: false
 ---
 In starting this blog, I have to ask, What amount and kind of content makes up good blog?  
