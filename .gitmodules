@@ -2,3 +2,7 @@
 	path = adamhutson.github.io
 	url = https://github.com/adamhutson/adamhutson.github.io
 	branch = master
+[submodule "themes/hugo-coder"]
+	path = themes/hugo-coder
+	url = https://github.com/adamhutson/hugo-coder.git
+	branch = master
