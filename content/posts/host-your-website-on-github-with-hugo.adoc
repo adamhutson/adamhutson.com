@@ -1,0 +1,36 @@
+---
+title: "Host your website on github with hugo"
+slug: host-your-website-on-github-with-hugo
+url: host-your-website-on-github-with-hugo
+date: 2019-12-01
+draft: true
+---
+
+= Host Your Website On Github With Hugo
+
+What we're going to do here is deploy hugo as a github page project.
+
+Loosely follow https://gohugo.io/hosting-and-deployment/hosting-on-github/
+
+Create adamhutson.com blog with hello world post
+
+Loosely follow https://gohugo.io/getting-started/quick-start/
+
+[source,bash]
+brew install hugo
+cd ~
+hugo new site adamhutson.com
+cd adamhutson.com
+git init
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+echo 'theme = "ananke"' >> config.toml
+hugo new posts/hello-world.md
+hugo server -D
+
+create github repository "adamhutson.github.io"
+
+register domain "adamhutson.com"
+
+create github repository "adamhutson.com"
+
+clone repo adamhutson.com
