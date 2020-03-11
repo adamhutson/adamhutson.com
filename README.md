@@ -1,23 +1,35 @@
-## Setup
+adamhutson.com blog
 
-### Install Hugo
+brew install hugo
+brew upgrade hugo
+hugo version
 
-`brew install hugo`
+cd ~/github.com/adamhutson
+hugo new site adamhutson.com
+cd adamhutson.com
+git init
 
-### Install AsciiDoctor
+>> browse https://themes.gohugo.io for potential themes
+decide on https://themes.gohugo.io/loveit/
 
-`gem install asciidoctor`
+https://hugoloveit.com/theme-documentation-basics/
 
-### Run Hugo locally
+update config.toml with selected settings
 
-`hugo server -D`
+cd static
+mkdir images
+add AdamHutson-Headshot-512x512.jpg
+update config.toml with 
+    [params.home.profile]
+        avatarURL = "/images/AdamHutson-Headshot-512x512.jpg"
 
-### View Hugo locally
+Default theme includes menu items for [Posts,Tags,Categories]
+Update to [Posts,Talks,Resume]
 
-http://localhost:1313/
+Need way to show slideshare widget
+Copy code from https://www.thepolyglotdeveloper.com/2019/01/create-custom-shortcodes-embed-content-hugo-posts-pages/
 
-## Deploy Changes
-
-`./deploy.sh "deployment commit message"`
-
-### Commit changes after deploy
+cd layouts
+mkdir shortcodes
+add slideshare.html
+use {{< slideshare id="" >}} to reference new 

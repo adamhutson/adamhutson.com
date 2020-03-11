@@ -1,93 +1,62 @@
 baseURL = "http://adamhutson.com/"
-languageCode = "en-us"
+defaultContentLanguage = "en"
+languageCode = "en"
 title = "Adam Hutson"
-theme = "hugo-coder"
-
-paginate = 20
-canonifyurls = true
-
-pygmentsstyle = "b2"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
+theme = "LoveIt"
 
 [params]
-    author = "Adam Hutson"
-    description = "Adam Hutson's personal website"
-    keywords = "blog,developer,personal"
-    info = "Data Architect and DevOps "
-    avatarurl = "images/AdamHutson-Headshot-512x512.jpg"
-    #footercontent = "Jump and grow wings on the way down"
-
-    dateformat = "January 2, 2006"
-
-    hideCredits = true
-    hideCopyright = true
-
-    # Git Commit in Footer, uncomment the line below to enable it.
-    #commit = "https://github.com/luizdepra/hugo-coder/tree/"
-
-    rtl = false
-
-    # Use inverted colors
-    inverted = true
-
-    # Series see also post count
-    maxSeeAlsoItems = 5
-
-    # Custom CSS
-    custom_css = []
+  version = "0.1.X"
+  [params.footer]
+    since = 2009
+  [params.home]
+    [params.home.profile]
+      enable = true
+      avatarURL = "/images/AdamHutson-Headshot-512x512.jpg"
+      subtitle = "Data Architect and DataOps Engineer"
+      social = true
+  [params.social]
+    GitHub = "adamhutson"
+    Linkedin = "adamhutson"
+    Twitter = "adamhutson"
+    Instagram = "adamhutson"
+    Email = "adam.hutson@yahoo.com"
+    Facebook = "hootsawn"
+    Slidershare = "adamhutson"
+  [params.page]
+    lightgallery = true
+    linkToMarkdown = true
+  [params.share]
+    enable = true
+    Twitter = true
+    Facebook = true
+    Linkedin = true
+  [params.comment]
+    enable = true
     
-    # Custom JS
-    custom_js = []
-
-[taxonomies]
-  category = "categories"
-  series = "series"
-  tag = "tags"
-
-[[params.social]]
-    name = "Github"
-    icon = "fab fa-github"
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is allowed), such as icons
+    pre = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
     weight = 1
-    url = "https://github.com/adamhutson/"
-[[params.social]]
-    name = "Twitter"
-    icon = "fab fa-twitter"
+  [[menu.main]]
+    identifier = "talks"
+    pre = ""
+    name = "Talks"
+    url = "/talks/"
+    title = ""
     weight = 2
-    url = "https://twitter.com/adamhutson/"
-[[params.social]]
-    name = "LinkedIn"
-    icon = "fab fa-linkedin"
+  [[menu.main]]
+    identifier = "categories"
+    pre = ""
+    name = "Resume"
+    url = "/resume/"
+    title = ""
     weight = 3
-    url = "https://www.linkedin.com/in/adamhutson/"
 
-[languages]
-    [languages.en]
-        languagename = "English"
-
-        [languages.en.menu]
-
-            [[languages.en.menu.main]]
-            name = "About"
-            weight = 1
-            url = "about/"
-
-            [[languages.en.menu.main]]
-            name = "Blog"
-            weight = 2
-            url = "posts/"
-
-            [[languages.en.menu.main]]
-            name = "Resume"
-            weight = 3
-            url = "resume/"
-
-            [[languages.en.menu.main]]
-            name = "Talks"
-            weight = 4
-            url = "talks/"
-
-            [[languages.en.menu.main]]
-            name = "Contact"
-            weight = 5
-            url = "contact/"
+[author]
+  name = "Adam"

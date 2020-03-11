@@ -1,0 +1,40 @@
+== Talks
+
+=== Cassandra Summit 2016
+==== C* Keys: Partitioning, Clustering, & Crossfit
+Recording:
+{{< youtube L0XqRF8C6D0 >}}
+SlideShare: 
+{{< slideshare id="2iF5V4LW1coMK1" >}}
+
+
+==== Data Modeling A Scheduling Application
+Recording:
+{{< youtube xuo3TSTDVC8 >}}
+SlideShare:
+{{< slideshare id="C8bTehXp4XnLIr" >}}
+
+
+=== This Week in Cassandra
+==== Data Modeling in the Real World
+Recording:
+{{< youtube GLHh7TNogYo >}}
+
+
+=== Meetups
+==== Montreal Canada Cassandra User Group
+Cloning Cassandra
+SlideShare: 
+{{< slideshare id="IBXoe8h6eAyFiN" >}}
+
+
+==== Springfield Missouri Python User Group 
+Cassandra & Python
+SlideShare: 
+{{< slideshare id="1tLdrAoVEg2nuT" >}}
+
+
+==== San Francisco Cassandra User Group
+Cloning Cassandra
+SlideShare: 
+{{< slideshare id="dOxtJlpJXsyx0D" >}}

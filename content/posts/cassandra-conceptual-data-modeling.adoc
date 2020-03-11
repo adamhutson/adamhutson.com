@@ -139,3 +139,4 @@ image::/images/SchedulingConceptualDataModel-Final.png[]
 This post covered the basics of what a conceptual data model entails, how to diagram one, and showed an in-depth example of creating one.  
 This should give you a good foundation to build upon.  
 Please check back soon, as I continue this path of creating the next steps in this data model, the Logical and Physical.
+Please check back soon, as I continue this path of creating the next steps in this data model, the Logical and Physical.

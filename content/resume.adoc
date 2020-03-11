@@ -1,5 +1,0 @@
----
-title: "Resume"
-slug: resume
----
-places I've worked and school I attended

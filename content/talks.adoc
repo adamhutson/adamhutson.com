@@ -1,5 +1,0 @@
----
-title: "Talks"
-slug: talks
----
-all of the talks I've given
