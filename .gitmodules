@@ -2,3 +2,7 @@
 	path = themes/LoveIt
 	url = https://github.com/dillonzq/LoveIt.git
 	branch = master
+[submodule "adamhutson.github.io"]
+	path = adamhutson.github.io
+	url = https://github.com/adamhutson/adamhutson.github.io.git
+	branch = master

@@ -28,8 +28,8 @@ Update to [Posts,Talks,Resume]
 
 Need way to show slideshare widget
 Copy code from https://www.thepolyglotdeveloper.com/2019/01/create-custom-shortcodes-embed-content-hugo-posts-pages/
-
 cd layouts
 mkdir shortcodes
 add slideshare.html
-use {{< slideshare id="" >}} to reference new 
+use {{< slideshare id="" >}} to reference new shortcode
+
