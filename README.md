@@ -33,3 +33,9 @@ mkdir shortcodes
 add slideshare.html
 use {{< slideshare id="" >}} to reference new shortcode
 
+Need way to have download widget
+cd layouts/shortcodes
+add download.html
+use {{< download file="" >}} to href a downloadable file
+
+add adamhutson.github.io as submodule to be destination of builds and ultimately hosted from (for free!)

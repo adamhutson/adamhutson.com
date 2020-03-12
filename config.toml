@@ -51,7 +51,7 @@ theme = "LoveIt"
     title = ""
     weight = 2
   [[menu.main]]
-    identifier = "categories"
+    identifier = "resume"
     pre = ""
     name = "Resume"
     url = "/resume/"

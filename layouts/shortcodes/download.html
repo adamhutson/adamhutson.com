@@ -1,0 +1,6 @@
+{{ with .Get "file" }}
+    <a href="/downloads/{{ . }}"
+       download = "{{ . }}"
+    >{{ . }}
+    </a>
+{{ end }}
