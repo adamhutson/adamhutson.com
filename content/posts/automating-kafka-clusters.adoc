@@ -1,0 +1,7 @@
+---
+title: "Automating Kakfa Clusters"
+slug: automating-kafka-clusters
+url: automating-kafka-clusters
+date: 2020-01-01
+draft: true
+---

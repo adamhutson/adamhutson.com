@@ -1,0 +1,7 @@
+---
+title: "Automated Rolling Elasticsearch Cluster Updates"
+slug: automated-rolling-elasticsearch-cluster-updates
+url: automated-rolling-elasticsearch-cluster-updates
+date: 2020-01-01
+draft: true
+---

@@ -1,0 +1,17 @@
+---
+title: "DataStax Aquires DataScale"
+slug: datastax-aquires-datascale
+url: datastax-aquires-datascale
+date: 2016-11-15
+draft: true
+---
+
+= DataStax aquires DataScale
+
+https://www.datastax.com/2016/11/datastax-acquires-datascale-unveils-plans-for-datastax-managed-cloud
+
+https://www.theregister.co.uk/2016/11/15/datastax_acquires_datascale_managed_cloud/
+
+https://www.cio.com/article/3142200/datastax-buys-datascale-plans-to-launch-managed-cloud-service.html
+
+{{< tweet 798587411332632577 >}}

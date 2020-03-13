@@ -7,6 +7,8 @@ Recording:
 SlideShare: 
 {{< slideshare id="2iF5V4LW1coMK1" >}}
 
+{{< tweet 773610284145528832 >}}
+{{< tweet 773638215488024576 >}}
 
 ==== Data Modeling A Scheduling Application
 Recording:
@@ -14,6 +16,8 @@ Recording:
 SlideShare:
 {{< slideshare id="C8bTehXp4XnLIr" >}}
 
+{{< tweet 774003080698351616 >}}
+{{< tweet 774024296385564672 >}}
 
 === This Week in Cassandra
 ==== Data Modeling in the Real World
@@ -27,14 +31,22 @@ Cloning Cassandra
 SlideShare: 
 {{< slideshare id="IBXoe8h6eAyFiN" >}}
 
+{{< tweet 770354552100954113 >}}
 
 ==== Springfield Missouri Python User Group 
 Cassandra & Python
 SlideShare: 
 {{< slideshare id="1tLdrAoVEg2nuT" >}}
 
+{{< tweet 798778740834566144 >}}
+
 
 ==== San Francisco Cassandra User Group
 Cloning Cassandra
 SlideShare: 
 {{< slideshare id="dOxtJlpJXsyx0D" >}}
+{{< tweet 745809550939348997 >}}
+
+=== Cassandra Summit 2015
+
+{{< tweet 646849153926959104 >}}

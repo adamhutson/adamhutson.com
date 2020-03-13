@@ -1,0 +1,7 @@
+---
+title: "Kafka Multi Data Center Explained"
+slug: kafka-multi-data-center-explained
+url: kafka-multi-data-center-explained
+date: 2020-01-01
+draft: true
+---

@@ -1,0 +1,7 @@
+---
+title: "Kafka Partitions Explained"
+slug: kafka-partitions-explained
+url: kafka-partitions-explained
+date: 2020-01-01
+draft: true
+---

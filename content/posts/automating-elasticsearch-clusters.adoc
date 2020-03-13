@@ -1,0 +1,7 @@
+---
+title: "Automating Elasticsearch Clusters"
+slug: automating-elasticsearch-clusters
+url: automating-elasticsearch-clusters
+date: 2020-01-01
+draft: true
+---

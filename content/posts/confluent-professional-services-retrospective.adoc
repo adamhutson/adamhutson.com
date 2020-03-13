@@ -1,0 +1,20 @@
+---
+title: "Confluent Professional Services Retrospective"
+slug: confluent-professional-services-retrospective
+url: confluent-professional-services-retrospective
+date: 2019-01-28
+draft: true
+---
+= Confluent Professional Services Retrospective
+
+post about leaving Confluent Professional Services.
+
+Why
+What
+Learning curve
+Customers
+Lessons Learned
+Best of times
+Worst of times
+Mentors
+Future of team

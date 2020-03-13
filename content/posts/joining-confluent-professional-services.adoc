@@ -1,0 +1,13 @@
+---
+title: "Joining Confluent Professional Services"
+slug: joining-confluent-professional-services
+url: joining-confluent-professional-services
+date: 2018-01-28
+draft: true
+---
+= Joining Confluent Professional Services
+
+post about joining Confluent Professional Services.
+
+Why
+What

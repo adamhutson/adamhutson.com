@@ -1,0 +1,12 @@
+---
+title: "Presentation At Inaugural ScyllaDB Summit"
+slug: presentation-at-inaugural-scylladb-summit
+url: presentation-at-inaugural-scylladb-summit
+date: 2016-09-03
+draft: true
+---
+= Presentation At Inaugural ScyllaDB Summit
+
+I was supposed to present at the inaugural ScyllaDB Summit this year.  My presentation was one of only 8 people selected to talk.  What an honor.  It is on migrating Cassandra data over to ScyllaDB.  Which I'm sure raises quite a few eyebrows in the Cassandra community.  There is such a distaste for what the Scylla guys are doing.  But I like it.  It's a healthy competition that is absolutely fair game.  Coincidentially, the Syclla conference is set to be the day before the Cassandra Summit 2016.  But, alas, it isn't meant to be.  My travel schedule won't allow me to make it to the ScyllaDB Summit in time, and have to cancel.  Maybe another summit, maybe another year.  But I'm not losing hope in Scylla,  it looks to be so promising.  Keep it up guys!
+
+{{< tweet 763215494136537088 >}}

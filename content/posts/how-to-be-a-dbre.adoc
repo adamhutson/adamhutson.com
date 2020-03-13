@@ -1,0 +1,7 @@
+---
+title: "How To Be A DBRE"
+slug: how-to-be-a-dbre
+url: how-to-be-a-dbre
+date: 2020-01-01
+draft: true
+---

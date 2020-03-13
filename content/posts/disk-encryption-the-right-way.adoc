@@ -1,0 +1,7 @@
+---
+title: "Disk Encryption The Right Way"
+slug: disk-encryption-the-right-way
+url: disk-encryption-the-right-way
+date: 2020-01-01
+draft: true
+---

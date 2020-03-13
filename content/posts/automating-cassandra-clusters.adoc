@@ -1,0 +1,7 @@
+---
+title: "Automating Cassandra Clusters"
+slug: automating-cassandra-clusters
+url: automating-cassandra-clusters
+date: 2020-01-01
+draft: true
+---
