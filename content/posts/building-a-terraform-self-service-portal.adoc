@@ -1,0 +1,89 @@
+---
+title: "Building A Terraform Self-Service Portal"
+slug: building-a-terraform-self-service-portal
+url: building-a-terraform-self-service-portal
+date: 2020-03-16
+draft: true
+---
+
+
+Can I execute the terraform binary from GoLang?
+
+.main.go
+[source, golang]
+----
+package main
+
+import (
+	"fmt"
+	"log"
+	"os/exec"
+)
+
+func main() {
+	cmd := exec.Command("terraform", "-version")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Fatalf("cmd.Run() failed with %s\n", err)
+	}
+	fmt.Printf(string(out))
+}
+----
+
+Test it
+
+[source, bash]
+----
+$ go run main.go 
+Terraform v0.12.23
+----
+
+
+Can I add a REST router in front of executing the terraform binary?
+
+.main.go
+[source, golang]
+----
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"os/exec"
+
+	"github.com/gorilla/mux"
+)
+
+func main() {
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", TerraformVersion)
+	log.Fatal(http.ListenAndServe(":8080", router))
+}
+
+func TerraformVersion(w http.ResponseWriter, r *http.Request) {
+	cmd := exec.Command("terraform", "-version")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Fatalf("cmd.Run() failed with %s\n", err)
+	}
+	fmt.Fprintln(w, string(out))
+}
+----
+
+Test it
+
+Terminal #1
+[source, bash]
+----
+$ go run main.go 
+----
+
+Terminal #2
+[source, bash]
+----
+$ open http://localhost:8080/
+
+$ curl http://localhost:8080/
+Terraform v0.12.23
+----
