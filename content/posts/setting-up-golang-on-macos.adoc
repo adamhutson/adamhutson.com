@@ -1,0 +1,85 @@
+---
+title: "Setting Up Golang On MacOS"
+slug: setting-up-golang-on-macos
+url: setting-up-golang-on-macos
+date: 2020-03-16
+draft: true
+---
+Update Home Brew
+
+[source, bash]
+----
+$ brew update
+----
+
+Use Brew to install GoLang
+
+[source, bash]
+----
+$ brew install go
+----
+
+Verify Go binary is installed
+
+[source, bash]
+----
+$ which go
+/usr/local/bin/go
+----
+
+Create a test go file
+
+.hello.go
+[source, golang]
+----
+package main
+import "fmt"
+func main() {
+    fmt.Printf("hello world\n")
+}
+----
+
+Run the test go file
+
+[source, bash]
+----
+$ go run hello.go 
+hello world
+----
+
+Set the Go Environment GOPATH switch
+
+[source, bash]
+----
+$ go env -w GOPATH=$HOME/go
+----
+
+Edit bash_profile to reference GOPATH
+
+[source, bash]
+----
+echo 'export GOPATH=$HOME/go' >> ~/.bash_profile
+----
+
+Source the bash_profile
+
+[source, bash]
+----
+source ~/.bash_profile
+----
+
+Did it work?
+
+[source, bash]
+----
+$ echo $GOPATH
+/Users/adamhutson/go
+----
+
+The $GOPATH is set, but it doesn't exist.  
+But go uses it for as part of it's workspace.
+Lets go get gorilla's mux.
+[source, bash]
+----
+$ go get github.com/gorilla/mux
+----
