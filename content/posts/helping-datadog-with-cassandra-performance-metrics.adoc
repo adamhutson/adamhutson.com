@@ -1,0 +1,17 @@
+---
+title: "Helping DataDog With Cassandra Performance Metrics"
+slug: helping-datadog-with-cassandra-performance-metrics
+url: helping-datadog-with-cassandra-performance-metrics
+date: 2015-12-04
+draft: false
+---
+= Helping DataDog With Cassandra Performance Metrics
+
+Recently, I had the priviledge of helping DataDog with a blog post on https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics/["How to Monitor Cassandra Performance Metrics"].
+This was a joint effort between https://www.linkedin.com/in/johnmatson79/[John Matson] of https://www.datadoghq.com/[DataDog], https://www.linkedin.com/in/mstump/[Matt Stump] of https://www.datastax.com/[DataStax], and myself.
+
+DataDog is the preferred monitoring tool for us here at DataScale.  We use it exclusively for all of our hosted clusters.  It is also powers our dashboards displaying in our DataScale Console.
+
+With our heavy use-case of DataDog and real-world Cassandra experience, DataDog reached out for help with their blog post.  I was able to point out which metrics we used day-to-day and what needed to be included in their post.
+
+Big thanks to John for letting me contribute to your article.  Always love getting to help the community.
