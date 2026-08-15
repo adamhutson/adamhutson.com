@@ -3,7 +3,7 @@ title: "Helping DataDog With Cassandra Performance Metrics"
 slug: helping-datadog-with-cassandra-performance-metrics
 url: helping-datadog-with-cassandra-performance-metrics
 date: 2015-12-04
-draft: false
+draft: true
 ---
 = Helping DataDog With Cassandra Performance Metrics
 

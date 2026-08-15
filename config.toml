@@ -1,4 +1,4 @@
-baseURL = "http://adamhutson.com/"
+baseURL = "https://adamhutson.com/"
 defaultContentLanguage = "en"
 languageCode = "en"
 title = "Adam Hutson"
@@ -60,3 +60,8 @@ theme = "LoveIt"
 
 [author]
   name = "Adam"
+# asciidoctor renders the .adoc posts. Hugo's default exec policy does not
+# whitelist it, and without this the AsciiDoc bodies are silently dropped
+# while the build still reports success.
+[security.exec]
+  allow = ['^(dart-)?sass(-embedded)?$', '^go$', '^npx$', '^postcss$', '^asciidoctor$']
