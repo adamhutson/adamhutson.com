@@ -32,7 +32,7 @@ The networking, education, and sense of community is over-whelming
 == Keynote
 
 Every year, the Summit is kicked off by a keynote that includes “Where the Industry is Going” speech by Billy Bosworth,
-image::/images/cassandra-summit-keynote.jpg[] and a “State of Cassandra” speech by Jonathan Ellis.  
+and a “State of Cassandra” speech by Jonathan Ellis.  
 This year, there was a new-comer to the stage.  
 Microsoft’s EVP of Cloud, Scott Guthrie, was there to tell the community that Microsoft has joined in Cassandra fun.  
 Wait, what?
@@ -44,7 +44,7 @@ Scott was there to sway our opinion as Microsoft is changing it’s course to fa
 == Sessions
 
 This year, there were so many sessions for learning that you really had to be selective in what you could attend.  
-A lot of image::/images/cassandra-summit-session1.jpg[] the sessions that I tried to attend were so popular that they had to close when maximum room occupancy was reached.  
+A lot of the sessions that I tried to attend were so popular that they had to close when maximum room occupancy was reached.  
 DataStax anticipated this and provided attendees to a chance to purchase a Priority Pass.  
 It would give you first access to all sessions, which could get you into the popular sessions before they closed.  
 Great idea, if you ask me.
@@ -54,7 +54,7 @@ I took the opportunity to mingle and network amongst the crowd as much as I coul
 It also gave me a chance to meet people in-person that I’ve interacted with online for years.  
 Getting to catch up and share a beer with so many Cassandra-ians in a way only the Summit can provide.
 
-Some of the sessions I tried to attend were closed due to popularity, image::/images/cassandra-summit-networking1.jpg[] but I was able to make it into others.  
+Some of the sessions I tried to attend were closed due to popularity, but I was able to make it into others.  
 Probably the most memorable one, too me, was CrowdStrike’s “1 million writes per second on 60 nodes with Cassandra and EBS”.  
 What a turn in traditional thinking that you can’t do high performance on Elastic Block Storage.  
 Up until now, it was Netflix’s benchmark that was the standard for how to achieve 1 million writes per second.  
@@ -63,15 +63,13 @@ Just goes to show what the community is capable of.
 
 == Certifications
 
-image::/images/cassandra-summit-certification1.jpg[]
-
 In addition to the sessions, DataStax provided a day before the Summit for people to get take Cassandra certification tests.  
 Just in that one day, over 500 people were able to receive certifications like Cassandra Certified Developer & Certified Administrator.
 
 == Slides
 
 Every year, DataStax tries to record most of the Summit’s sessions so they can post them to Planet Cassandra for the community to enjoy.  
-That way you are able to see  the sessions that you missed image::/images/cassandra-summit-slides1.jpg[] out on.  
+That way you are able to see  the sessions that you missed out on.  
 Some of the breakouts and booth presentations are not recorded.  
 Those you just have to be there to see live.  
 All the recordings & slides take a little while to gather from the speakers, so it’s not accessible for a while after the Summit.  

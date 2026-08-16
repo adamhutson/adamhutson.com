@@ -3,7 +3,7 @@ title: "How To Create a Cassandra Cluster in AWS Part 2"
 slug: how-to-create-a-cassandra-cluster-in-aws-part-2
 url: how-to-create-a-cassandra-cluster-in-aws-part-2
 date: 2016-01-08
-draft: false
+draft: true
 ---
 = How To Create a Cassandra Cluster in AWS Part 2
 

@@ -22,7 +22,7 @@ This post will cover the following topics about backing up Cassandra data.
 * Naming a snapshot
 * Incremental snapshots
 * Removing snapshots
- 
+
 It will also cover a few recommended actions to do with snapshots.
 
 * Off-site snapshots
@@ -42,7 +42,7 @@ The MemTables can be rebuilt using the Commit Log if a crash happens before the 
 
 * Last, when the Memtable fills up, the data is flushed to an immutable SSTable. 
 SSTables are the data files on disk.
- 
+
 image::/images/write-process.png[]
 
 == Taking a Snapshot
@@ -57,11 +57,9 @@ This flushes all the data that is currently in Cassandra’s memtables to disk.
 
 * Second, it creates a new snapshot directory and places hard-links of all of the SSTable data files in it.  
 By default, the snapshot directory is given a name corresponding to the epoch timestamp at which it was taken.
-image::/images/cassandra-snapshot-1.png[]
 
 The snapshot command also allows you to optionally specify a keyspace.  
 This will target only the specified keyspace.
-image::/images/cassandra-snapshot-2.png[]
 
 == Where Snapshots are Stored
 
@@ -74,11 +72,9 @@ For each snapshot taken, a new directory is created with either the epoch time o
 <data_directory_location/keyspace_name/table_name/snapshots/snapshot_name/*>
 
 == Viewing Snapshots
- 
+
 With the release of Cassandra 2.1, nodetool included a listsnapshots command.  
 This command outputs all the snapshots
-
-image::/images/view-snapshots-768x46.png[]
 
 == Naming a Snapshot
 
@@ -88,8 +84,6 @@ This parameter is -t.
 Naming a snapshot can be very helpful for organization.  
 Names could be formated as readable dates or as a before/after upgrade.  
 It’s up to you how creative your applied name is.
-
-image::/images/naming-a-snapshot.png[]
 
 == Incremental Snapshots
 
@@ -106,8 +100,6 @@ Cassandra does not automatically remove snapshot files.
 However, nodetool includes a command to do just that.  
 By issuing a nodetool clearsnapshot command and passing in the name of the snapshot (name or epoch), it will request that the snapshot is removed.  
 Note, that it may take a small amount of time to actually remove the files.  
-
-image::/images/removing-snapshots.png[]
 
 == Recommendations
 
