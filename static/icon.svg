@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <!-- adamhutson.com mark: AH drawn as geometry, no text elements, so it
        renders identically whether or not a machine has Helvetica. -->
   <rect width="64" height="64" rx="12" fill="#22262b"/>

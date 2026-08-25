@@ -3,6 +3,11 @@
 
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+{{- /* Local addition to the vendored theme. Modern browsers prefer the SVG and
+       it stays crisp at any size. It also gives Chrome an icon URL it has never
+       seen, which is what finally dislodged its cached "this site has no
+       favicon" record for adamhutson.com. */ -}}
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
