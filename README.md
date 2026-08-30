@@ -18,10 +18,10 @@ update config.toml with selected settings
 
 cd static
 mkdir images
-add AdamHutson-Headshot-512x512.jpg
+add AdamHutson-Headshot-Beach-512x512.jpg
 update config.toml with 
     [params.home.profile]
-        avatarURL = "/images/AdamHutson-Headshot-512x512.jpg"
+        avatarURL = "/images/AdamHutson-Headshot-Beach-512x512.jpg"
 
 Default theme includes menu items for [Posts,Tags,Categories]
 Update to [Posts,Talks,Resume]
